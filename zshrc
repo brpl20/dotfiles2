@@ -9,10 +9,6 @@ ZSH_THEME="robbyrussell"
 # Useful oh-my-zsh plugins for Le Wagon bootcamps
 plugins=(git gitfast last-working-dir common-aliases sublime history-substring-search pyenv ssh-agent)
 
-# (macOS-only) Prevent Homebrew from reporting - https://github.com/Homebrew/brew/blob/master/docs/Analytics.md
-export HOMEBREW_NO_ANALYTICS=1
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
 # Actually load Oh-My-Zsh
 source "${ZSH}/oh-my-zsh.sh"
 unalias rm # No interactive rm by default (brought by plugins/common-aliases)
@@ -65,28 +61,14 @@ export BUNDLER_EDITOR="subl $@ >/dev/null 2>&1 -a"
 export BUNDLER_EDITOR="subl $@ >/dev/null 2>&1 -a"
 export BUNDLER_EDITOR="subl $@ >/dev/null 2>&1 -a"
 export BUNDLER_EDITOR="subl $@ >/dev/null 2>&1 -a"
-source /Users/brpl20/.oh-my-zsh/custom/plugins/zsh-autosuggestions
-source /Users/brpl20/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 export BUNDLER_EDITOR="'/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl' -a"
 export BUNDLER_EDITOR="'/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl' -a"
-export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
-export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/opt/homebrew/share/zsh-syntax-highlighting/highlighters
-export PATH="/opt/homebrew/opt/postgresql@13/bin:$PATH"
-export PATH="/opt/homebrew/opt/postgresql@13/bin:$PATH"
 
 eval "$(atuin init zsh)"
-
-# ALIASES-BASE (LINUX AND MAC)
-[[ -f "$HOME/.aliases-base" ]] && source "$HOME/.aliases-base" || echo "Error: $HOME/.aliases-base not found."
 
 # Aliases for macOS-specific aliases
 if [ "$os_type" = "Darwin" ]; then
   [[ -f "$HOME/.aliases-mac" ]] && source "$HOME/.aliases-mac" || echo "Error: $HOME/.aliases-mac not found."
-fi
-
-# Aliases for Linux-specific aliases
-if [ "$os_type" = "Linux" ]; then
-  [[ -f "$HOME/.aliases-linux" ]] && source "$HOME/.aliases-linux" || echo "Error: $HOME/.aliases-linux not found."
 fi
 
 # Aliases macOS-specific aliases
@@ -97,14 +79,35 @@ if [ "$os_type" = "Darwin" ]; then
   export CODEF="/Users/brpl20/code"
   export DESK="/Users/brpl20/Desktop"
   export DOWN="/Users/brpl20/Downloads"
+  source /Users/brpl20/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+  source /Users/brpl20/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+  export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/opt/homebrew/share/zsh-syntax-highlighting/highlighters
+  export PATH="/opt/homebrew/opt/postgresql@13/bin:$PATH"
+  export PATH="/opt/homebrew/opt/postgresql@13/bin:$PATH"
+  export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+  export HOMEBREW_NO_ANALYTICS=1
+  source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+  echo "Mac!"
 fi
 
 # Aliases Linux-specific aliases
 if [ "$os_type" = "Linux" ]; then
-  export GD="/home/brpl/Library/CloudStorage/GoogleDrive-pelli.br@gmail.com/Meu\ Drive"
-  export ESPANSO="/home/brpl/Library/Application\ Support/espanso/match"
-  export OD="/home/brpl/Library/CloudStorage/OneDrive-Pessoal:$OD"
+  export GD="/home/brpl/gd"
+  export ESPANSO="/espanso-TODO"
+  export OD="/home/brpl/od"
   export CODEF="/home/brpl/code"
-  export DESK="/Users/brpl20/desktop"
-  export DOWN="/Users/brpl20/downloads"
+  export DESK="/home/brpl/Desktop"
+  export DOWN="/home/brpl/Downloads"
+  source /home/brpl/code/dotfiles2/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
+
+# ALIASES-BASE (LINUX AND MAC)
+[[ -f "$HOME/.aliases-base" ]] && source "$HOME/.aliases-base" || echo "Error: $HOME/.aliases-base not found."
+
+
+# Aliases for Linux-specific aliases
+if [ "$os_type" = "Linux" ]; then
+  [[ -f "$HOME/.aliases-linux" ]] && source "$HOME/.aliases-linux" || echo "Error: $HOME/.aliases-linux not found."
+fi
+
+echo "Olá Bruno! Não se equeça de fazer esse o melhor dia de sua vida! Memento Mori"

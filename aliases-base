@@ -27,7 +27,7 @@ makedirandcdintodir() { mkdir "$1" && cd "$1"; }
 
 # Apps
 alias c.="code ."
-alias subl. = "subl ."
+alias subl.= "subl ."
 
 # System Improvments
 alias lla="ll -all"
@@ -68,8 +68,6 @@ alias wao="cd $CODEF/whats-organizer"
 
 alias desk="cd $DESK"
 alias down="cd $DOWN"
-alias yt="sh $CODEF/dotfiles2/yt.sh"
-alias camisetas="$CODEF/dotfiles2/camiseta.sh"
 alias dot="cd $CODEF/dotfiles2"
 
 # Comandos Recorrentes
