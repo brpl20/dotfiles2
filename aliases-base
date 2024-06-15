@@ -1,0 +1,86 @@
+# Configs 
+alias myip="curl https://ipinfo.io/json" # or /ip for plain-text ip
+alias zshconfig="code ~/.zshrc"
+alias ex="exec zsh"
+
+# Git 
+alias gp="git push origin master"
+alias gpm="git push origin main"
+alias gst='git status'
+
+# Coding
+alias rs3="rails s -p 3001"
+alias dev="pnpm dev"
+alias rc="rails c"
+alias rdb="rails db:migrate"
+alias rdbd="rails db:drop"
+alias py="python3"
+alias pip="pip3"
+alias pipi="pip3 install" 
+alias npi="npm install"
+alias ya="yarn"
+alias yai="yarn"
+
+# Mkdir and Cd Into 
+alias mkcd="mkcd"
+makedirandcdintodir() { mkdir "$1" && cd "$1"; }
+
+# Apps
+alias c.="code ."
+alias subl. = "subl ."
+
+# System Improvments
+alias lla="ll -all"
+alias ~="cd ~"
+alias .="cd .."
+alias ..="cd ../.."
+alias ...="cd ../../.."
+alias ....="cd ../../../.."
+alias cd..="cd .."
+
+# Rest of the aliases and Espanso 
+alias cataliases="cat $HOME/.aliases-base"
+alias edaliases="code $HOME/.aliases-base"
+alias catespanso="cat $ESPANSO/base.yml"
+alias edespanso="code $ESPANSO/base.yml"
+alias eduteis="code $GD/wikit/daily/uteisNew.md"
+
+# Locations
+alias gd="cd $GD"
+alias wi="cd $GD/wikit"
+alias daily="code $GD/wikit"
+alias uteis="nvim $GD/wikit/daily/uteisNew.md"
+alias codef="cd $CODEF"
+
+alias lb="code $CODEF/learning-blog/_posts"
+alias lbf="cd $CODEF/learning-blog"
+alias lbup="sh $CODEF/learning-blog/github-learning-blog.sh"
+
+alias prc="cd $CODEF/procstudio_api"
+alias prcf="cd $CODEF/procstudio_front"
+
+alias blog="code $CODEF/brpl-blog/_posts"
+alias blogf="cd $CODEF/brpl-blog"
+alias blogup="sh $CODEF/brpl-blog/gitup.sh"
+
+alias wab="cd $CODEF/whatsbot"
+alias wao="cd $CODEF/whats-organizer"
+
+alias desk="cd $DESK"
+alias down="cd $DOWN"
+alias yt="sh $CODEF/dotfiles2/yt.sh"
+alias camisetas="$CODEF/dotfiles2/camiseta.sh"
+alias dot="cd $CODEF/dotfiles2"
+
+# Comandos Recorrentes
+alias pbel="lp -o landscape $GD/bel/organizador-bel.pdf"
+alias swap="sh $GD/lztforeverfiles/aws_swap.sh"
+
+# Grep Fast SS 
+# alias s="grep 'YOUR_TERM' "
+alias ss="grep_search_term_in_my_file"
+
+grep_search_term_in_my_file() {
+    grep "$1" $GD/wikit/daily/uteisNew.md | awk -F'=> ' '{print $2}' | awk '{print $1}' | pbcopy
+    grep "$1" $GD/wikit/daily/uteisNew.md
+}
