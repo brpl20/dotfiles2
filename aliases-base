@@ -47,6 +47,7 @@ alias eduteis="code $GD/wikit/daily/uteisNew.md"
 
 # Locations
 alias gd="cd $GD"
+alias od="cd $OD"
 alias wi="cd $GD/wikit"
 alias daily="code $GD/wikit"
 alias uteis="nvim $GD/wikit/daily/uteisNew.md"
@@ -62,23 +63,14 @@ alias prcf="cd $CODEF/procstudio_front"
 alias blog="code $CODEF/brpl-blog/_posts"
 alias blogf="cd $CODEF/brpl-blog"
 alias blogup="sh $CODEF/brpl-blog/gitup.sh"
+alias dot="cd $CODEF/dotfiles2"
 
 alias wab="cd $CODEF/whatsbot"
 alias wao="cd $CODEF/whats-organizer"
 
 alias desk="cd $DESK"
 alias down="cd $DOWN"
-alias dot="cd $CODEF/dotfiles2"
 
 # Comandos Recorrentes
 alias pbel="lp -o landscape $GD/bel/organizador-bel.pdf"
 alias swap="sh $GD/lztforeverfiles/aws_swap.sh"
-
-# Grep Fast SS 
-# alias s="grep 'YOUR_TERM' "
-alias ss="grep_search_term_in_my_file"
-
-grep_search_term_in_my_file() {
-    grep "$1" $GD/wikit/daily/uteisNew.md | awk -F'=> ' '{print $2}' | awk '{print $1}' | pbcopy
-    grep "$1" $GD/wikit/daily/uteisNew.md
-}
