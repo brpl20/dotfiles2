@@ -40,7 +40,7 @@ alias cd..="cd .."
 
 # Rest of the aliases and Espanso 
 alias cataliases="cat $HOME/.aliases-base"
-alias edaliases="code $HOME/.aliases-base"
+alias edaliases="cd $CODEF/dotfiles2 && vim $CODEF/dotfiles2/aliases-base"
 alias catespanso="cat $ESPANSO/base.yml"
 alias edespanso="code $ESPANSO/base.yml"
 alias eduteis="code $GD/wikit/daily/uteisNew.md"
@@ -59,6 +59,9 @@ alias lbup="sh $CODEF/learning-blog/github-learning-blog.sh"
 
 alias prc="cd $CODEF/procstudio_api"
 alias prcf="cd $CODEF/procstudio_front"
+
+alias loro="open $GD/loro-pizza-gpt"
+alias lorotd="vim $GD/loro-pizza-gpt/todo-en.md"
 
 alias blog="code $CODEF/brpl-blog/_posts"
 alias blogf="cd $CODEF/brpl-blog"
