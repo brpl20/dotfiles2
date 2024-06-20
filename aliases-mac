@@ -3,6 +3,6 @@
 alias ss="grep_search_term_in_my_file"
 
 grep_search_term_in_my_file() {
-    grep "$1" $GD/wikit/daily/uteisNew.md | awk -F'=> ' '{print $2}' | awk '{print $1}' | pbcopy
-    grep "$1" $GD/wikit/daily/uteisNew.md
+    grep "$1" "/Users/brpl20/Library/CloudStorage/GoogleDrive-pelli.br@gmail.com/Meu\ Drive/wikit/daily/uteisNew.md" | awk -F'=> ' '{print $2}' | awk '{print $1}' | pbcopy
+    grep "$1" "/Users/brpl20/Library/CloudStorage/GoogleDrive-pelli.br@gmail.com/Meu\ Drive/wikit/daily/uteisNew.md"
 }
