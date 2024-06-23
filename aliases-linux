@@ -6,3 +6,5 @@ grep_search_term_in_my_file() {
     grep "$1" $GD/wikit/daily/uteisNew.md | awk -F'=> ' '{print $2}' | awk '{print $1}' | xclip -selection clipboard
     grep "$1" $GD/wikit/daily/uteisNew.md
 }
+
+alias pwdc='pwd | xclip -selection clipboard'
