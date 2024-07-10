@@ -1,0 +1,10 @@
+1.3G	/Users/brpl20/Library/Application Support/Adobe/Common/Media Cache Files/1 hour Bossa Nova Mix   no copyright background musi.mp3 44100.cfa
+1.2G	/Users/brpl20/Library/Developer/CoreSimulator/Caches/dyld/22F66/com.apple.CoreSimulator.SimRuntime.iOS-16-4.20E247/dyld_sim_shared_cache_arm64
+1.2G	/Users/brpl20/.ollama/models/blobs/sha256:170370233dd5c5415250a2ecd5c71586352850729062ccef1496385647293868-partial
+358M	/Users/brpl20/Library/Application Support/Firefox/Profiles/5cri1tvj.default-release/storage/default/https+++web.whatsapp.com/idb/2181795718meogdaerlo-ts.sqlite
+329M	/Users/brpl20/Library/Caches/Homebrew/downloads/9f66fedea2c2e71540f17df323afb6cb7cbfa1fd4a81aa856669cdcf607793a7--tesseract-lang--4.1.0.all.bottle.1.tar.gz
+306M	/Users/brpl20/.Trash/Adobe Premiere Pro 2024/Adobe Premiere Pro 2024.app/Contents/MacOS/CEPHtmlEngine.app/Contents/Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework
+306M	/Users/brpl20/.Trash/Adobe Media Encoder 2024/Adobe Media Encoder 2024.app/Contents/MacOS/CEPHtmlEngine.app/Contents/Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework
+306M	/Users/brpl20/.Trash/Adobe Illustrator 2024/Adobe Illustrator.app/Contents/MacOS/CEPHtmlEngine/CEPHtmlEngine.app/Contents/Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework
+292M	/Users/brpl20/Library/Caches/ms-playwright/chromium-1097/chrome-mac/Chromium.app/Contents/Frameworks/Chromium Framework.framework/Versions/121.0.6167.57/Chromium Framework
+280M	/Users/brpl20/.Trash/Adobe Photoshop 2024/Adobe Photoshop 2024.app/Contents/MacOS/Adobe Photoshop 2024
