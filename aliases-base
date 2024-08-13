@@ -66,7 +66,10 @@ alias lorotd="vim $GD/loro-pizza-gpt/todo-en.md"
 alias blog="code $CODEF/brpl-blog/_posts"
 alias blogf="cd $CODEF/brpl-blog"
 alias blogup="sh $CODEF/brpl-blog/gitup.sh"
-alias artigo='function _artigo(){ touch "${1}.mdx" && cat $CODEF/dotfiles2/headermdx.txt > "${1}.mdx"; echo "The file ${1}.mdx has been created and populated with content from headermdx.txt."; }; _artigo'
+
+alias blogadv="code $CODEF/sftown-pellizzetti-associados-fe/src/content/blog"
+alias blogadv="cd "$CODEF/Users/brpl20/code/sftown-pellizzetti-associados-fe"
+alias blogart='function _artigo(){ touch "${1}.mdx" && cat $CODEF/dotfiles2/headermdx.txt > "${1}.mdx"; echo "The file ${1}.mdx has been created and populated with content from headermdx.txt."; }; _artigo'
 alias dot="cd $CODEF/dotfiles2"
 
 
