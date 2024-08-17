@@ -79,3 +79,4 @@ alias down="cd $DOWN"
 # Comandos Recorrentes
 alias pbel="lp -o landscape $GD/bel/organizador-bel.pdf"
 alias swap="sh $GD/lztforeverfiles/aws_swap.sh"
+alias sst="syncthing"
