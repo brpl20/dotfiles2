@@ -79,8 +79,8 @@ if [ "$os_type" = "Darwin" ]; then
   export CODEF="/Users/brpl20/code"
   export DESK="/Users/brpl20/Desktop"
   export DOWN="/Users/brpl20/Downloads"
-  source /Users/brpl20/.oh-my-zsh/custom/plugins/zsh-autosuggestions
-  source /Users/brpl20/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+  # source /Users/brpl20/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+  # source /Users/brpl20/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
   export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/opt/homebrew/share/zsh-syntax-highlighting/highlighters
   export PATH="/opt/homebrew/opt/postgresql@13/bin:$PATH"
   export PATH="/opt/homebrew/opt/postgresql@13/bin:$PATH"
