@@ -31,6 +31,8 @@ alias subl.= "subl ."
 
 # System Improvments
 alias lla="ll -all"
+alias lg='function _lg() { ll -all | grep -i "$1"; }; _lg'
+alias lG='function _lG() { ll -all | grep "$1"; }; _lG'
 alias ~="cd ~"
 alias .="cd .."
 alias ..="cd ../.."
