@@ -42,6 +42,7 @@ lg() {
 lG() {
     ll -a | grep "$@"
 }
+
 alias ~="cd ~"
 alias .="cd .."
 alias ..="cd ../.."

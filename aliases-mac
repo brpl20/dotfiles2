@@ -1,14 +1,37 @@
 # Grep Fast SS 
 # alias s="grep 'YOUR_TERM' "
-alias ss="grep_search_term_in_my_file"
 
-grep_search_term_in_my_file() {
-    grep "$1" "/Users/brpl20/Library/CloudStorage/GoogleDrive-pelli.br@gmail.com/Meu Drive/wikit/daily/uteisNew.md" | awk -F'=> ' '{print $2}' | awk '{print $1}' | pbcopy
-    grep "$1" "/Users/brpl20/Library/CloudStorage/GoogleDrive-pelli.br@gmail.com/Meu Drive/wikit/daily/uteisNew.md"
+alias ss="search_term_in_my_file"
+
+search_term_in_my_file() {
+    local file="/Users/brpl20/Library/CloudStorage/GoogleDrive-pelli.br@gmail.com/Meu Drive/wikit/daily/uteisNew.md"
+
+    if [[ "$1" == "#" ]]; then
+        # New approach: search for sections
+        awk -v term="# $2" '
+        $0 ~ term {
+            found = 1
+            print
+            next
+        }
+        found && NF {
+            print
+            next
+        }
+        found && !NF {
+            found = 0
+        }
+        ' "$file" | tee >(pbcopy)
+    else
+        # Original approach: grep search
+        # grep "$1" "$file" | awk -F'=> ' '{print $2}' | awk '{print $1}' | tee >(pbcopy)
+        # grep "$1" "$file"
+        grep "$1" "$file" | awk -F'=> ' '{print $2}' | awk '{print $1}' | pbcopy
+        grep "$1" "$file"
+    fi
 }
 
+# Other Aliases 
 alias pwdc='pwd | pbcopy'
-
 alias ssd='cd /Volumes/BPSSD'
-
 alias typescript='cd /Volumes/BPSSD/DOWNLOADS/Coding - TypeScript'
