@@ -35,3 +35,4 @@ search_term_in_my_file() {
 alias pwdc='pwd | pbcopy'
 alias ssd='cd /Volumes/BPSSD'
 alias typescript='cd /Volumes/BPSSD/DOWNLOADS/Coding - TypeScript'
+alias DOWN="cd /Volumes/BPSSD/DOWNLOADS"
