@@ -8,3 +8,5 @@ grep_search_term_in_my_file() {
 }
 
 alias pwdc='pwd | xclip -selection clipboard'
+alias DOWN="cd /home/brpl/DOWNLOADS"
+
