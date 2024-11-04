@@ -9,7 +9,7 @@ search_term_in_my_file() {
     if [[ "$1" == "#" ]]; then
         # New approach: search for sections
         awk -v term="# $2" '
-        $0 ~ term {
+        $0 ~ "^" term {
             found = 1
             print
             next
@@ -22,6 +22,7 @@ search_term_in_my_file() {
             found = 0
         }
         ' "$file" | tee >(pbcopy)
+
     else
         # Original approach: grep search
         # grep "$1" "$file" | awk -F'=> ' '{print $2}' | awk '{print $1}' | tee >(pbcopy)
