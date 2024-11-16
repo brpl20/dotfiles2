@@ -1,0 +1,59 @@
+					<string>on run {input, parameters}
+	set ffmpegPath to "/opt/homebrew/bin/ffmpeg"
+	set jqPath to "/opt/homebrew/bin/jq"
+	
+	repeat with theFile in input
+		set filePath to POSIX path of theFile
+		set fileName to name of (info for theFile)
+		set fileExtension to name extension of (info for theFile)
+		set baseName to text 1 thru -((length of fileExtension) + 2) of fileName
+		
+		-- Get the directory of the file
+		tell application "System Events"
+			set fileDirectory to POSIX path of (container of theFile)
+		end tell
+		
+		set outputPath to filePath &amp; ".txt"
+		set tempFilePath to "/tmp/temp.mp3"
+		
+		-- Convert to MP3 if necessary
+		if fileExtension is not "mp3" then
+			do shell script ffmpegPath &amp; " -i " &amp; quoted form of filePath &amp; " -acodec libmp3lame -q:a 2 " &amp; quoted form of tempFilePath
+			
+			-- Wait until the file is fully converted
+			repeat
+				try
+					set fileSize to do shell script "stat -f%z " &amp; quoted form of tempFilePath
+					if fileSize &gt; 0 then exit repeat
+				end try
+				delay 1
+			end repeat
+			
+			set filePath to tempFilePath
+		end if
+		
+		-- Prepare the cURL command for sending the request to the OpenAI API
+		set apiKey to ""
+		set curlCommand to "curl https://api.openai.com/v1/audio/transcriptions -X POST"
+		set curlCommand to curlCommand &amp; " -H 'Authorization: Bearer " &amp; apiKey &amp; "'"
+			set curlCommand to curlCommand &amp; " -H 'Content-Type: multipart/form-data'"
+		set curlCommand to curlCommand &amp; " -F 'file=@" &amp; filePath &amp; "'"
+		set curlCommand to curlCommand &amp; " -F 'model=whisper-1'"
+		set curlCommand to curlCommand &amp; " -F 'language=pt'"
+		
+		-- Execute the cURL command
+		set jsonResponse to do shell script curlCommand
+		
+		-- Extract the transcription from the JSON response using jq
+		set responseText to do shell script "echo " &amp; quoted form of jsonResponse &amp; " | " &amp; jqPath &amp; " -r '.text'"
+		
+		-- Save the transcription to the output file
+		do shell script "echo " &amp; quoted form of responseText &amp; " &gt; " &amp; quoted form of outputPath
+		
+		-- Clean up temporary files
+		do shell script "rm -f " &amp; quoted form of tempFilePath
+	end repeat
+	
+	return input
+end run</string>
+

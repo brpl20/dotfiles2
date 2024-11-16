@@ -79,8 +79,7 @@ if [ "$os_type" = "Darwin" ]; then
   export CODEF="/Users/brpl20/code"
   export DESK="/Users/brpl20/Desktop"
   export DOWN="/Users/brpl20/Downloads"
-  # source /Users/brpl20/.oh-my-zsh/custom/plugins/zsh-autosuggestions
-  # source /Users/brpl20/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+  export BIGDOWN="/Volumes/BPSSD/DOWNLOADS"
   export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/opt/homebrew/share/zsh-syntax-highlighting/highlighters
   export PATH="/opt/homebrew/opt/postgresql@13/bin:$PATH"
   export PATH="/opt/homebrew/opt/postgresql@13/bin:$PATH"
@@ -98,6 +97,7 @@ if [ "$os_type" = "Linux" ]; then
   export CODEF="/home/brpl/code"
   export DESK="/home/brpl/Desktop"
   export DOWN="/home/brpl/Downloads"
+  export BIGDOWN="/home/brpl/DOWNLOADS"
   source /home/brpl/code/dotfiles2/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 

@@ -91,6 +91,7 @@ alias wao="cd $CODEF/whats-organizer"
 
 alias desk="cd $DESK"
 alias down="cd $DOWN"
+alias DOWN="cd $BIGDOWN"
 
 # Comandos Recorrentes
 alias pbel="lp -o landscape $GD/bel/organizador-bel.pdf"
