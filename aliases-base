@@ -10,10 +10,12 @@ alias gst='git status'
 
 # Coding
 alias rs3="rails s -p 3001"
+alias rs="rails s"
 alias dev="pnpm dev"
 alias rc="rails c"
 alias rdb="rails db:migrate"
 alias rdbd="rails db:drop"
+alias rdbc="rails db:create"
 alias py="python3"
 alias pip="pip3"
 alias pipi="pip3 install" 
