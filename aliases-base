@@ -31,6 +31,7 @@ makedirandcdintodir() { mkdir "$1" && cd "$1"; }
 # Apps
 alias c.="code ."
 alias subl.= "subl ."
+alias z.="zed ."
 
 # System Improvments
 alias lla="ll -all"
