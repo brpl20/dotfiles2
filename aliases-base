@@ -35,8 +35,8 @@ alias z.="zed ."
 
 # System Improvments
 alias lla="ll -all"
-# System Improvments
-alias lla="ll -all"
+alias fall='find . -iname'
+
 # Define case-insensitive search
 lg() {
     ll -a | grep -i "$@"
