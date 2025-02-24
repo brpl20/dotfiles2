@@ -1,3 +1,4 @@
+# dotfiles2 aliaes 
 # Configs 
 alias myip="curl https://ipinfo.io/json" # or /ip for plain-text ip
 alias zshconfig="code ~/.zshrc"
@@ -33,9 +34,10 @@ alias c.="code ."
 alias subl.= "subl ."
 alias z.="zed ."
 
-# System Improvments
+# System
 alias lla="ll -all"
 alias fall='find . -iname'
+alias bigtree='/Users/brpl20/code/dotfiles2/shell_scripts/bigtree.sh'
 
 # Define case-insensitive search
 lg() {
