@@ -37,7 +37,7 @@ alias z.="zed ."
 # System
 alias lla="ll -all"
 alias fall='find . -iname'
-alias bigtree='/Users/brpl20/code/dotfiles2/shell_scripts/bigtree.sh'
+alias bigtree='/Users/brpl20/code/dotfiles2/shell_scripts/big_tree.sh'
 
 # Define case-insensitive search
 lg() {

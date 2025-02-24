@@ -1,7 +1,12 @@
 #!/bin/bash
 
+# Creates a project tree
+# and 
+# cat all the files 
+# use mostly for IA
 # Output file in the same directory as this script
-script_dir=$(dirname "$(readlink -f "$0")")
+
+script_dir=$(cd "$(dirname "$0")" && pwd)
 output_file="$script_dir/project_log.txt"
 
 # Create the output file with a header
