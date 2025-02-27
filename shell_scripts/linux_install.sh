@@ -59,6 +59,16 @@ sudo apt install -y gh
 echo "Please authenticate with GitHub..."
 gh auth login
 
+
+echo "Type in your first and last name (no accent or special characters - e.g. 'ç'): "
+read full_name
+
+echo "Type in your email address (the one used for your GitHub account): "
+read email
+
+git config --global user.email "$email"
+git config --global user.name "$full_name"
+
 # Install Google Chrome
 echo "Installing Google Chrome..."
 if ! command -v google-chrome &> /dev/null; then
@@ -86,6 +96,37 @@ wget "$INSYNC_URL"
 sudo apt install -y "./insync_${INSYNC_VERSION}-bookworm_amd64.deb"
 rm "./insync_${INSYNC_VERSION}-bookworm_amd64.deb"
 
+# Install Insync Nautilus integration
+echo "Installing Insync context menu for Nautilus..."
+if command -v nautilus &> /dev/null; then
+  sudo apt install -y insync-nautilus
+  echo "Insync context menu for Nautilus installed"
+else
+  echo "Nautilus file manager not found. Skipping Insync context menu installation."
+fi
+
+# Install Syncthing
+echo "Installing Syncthing..."
+if ! command -v syncthing &> /dev/null; then
+  # Add the release PGP keys
+  sudo mkdir -p /etc/apt/keyrings
+  sudo curl -L -o /etc/apt/keyrings/syncthing-archive-keyring.gpg https://syncthing.net/release-key.gpg
+  
+  # Add the "stable" channel to APT sources
+  echo "deb [signed-by=/etc/apt/keyrings/syncthing-archive-keyring.gpg] https://apt.syncthing.net/ syncthing stable" | sudo tee /etc/apt/sources.list.d/syncthing.list
+  
+  # Update and install syncthing
+  sudo apt-get update
+  sudo apt-get install -y syncthing
+  
+  # Enable and start Syncthing service for current user
+  systemctl --user enable syncthing.service
+  systemctl --user start syncthing.service
+  echo "Syncthing installed and started for current user"
+else
+  echo "Syncthing is already installed"
+fi
+
 # Install VS Code
 echo "Installing Visual Studio Code..."
 if ! command -v code &> /dev/null; then
@@ -107,6 +148,34 @@ code --install-extension svipas.control-panel
 echo "Installing Python and pip..."
 sudo apt install -y python3 python3-pip python3-venv
 
+# Install Docker with proper repository setup
+echo "Installing Docker..."
+sudo apt install -y ca-certificates curl gnupg tree
+
+# Add Docker's official GPG key
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+
+# Add the repository to Apt sources
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian bookworm stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+# Install Docker Engine and related packages
+sudo apt update
+sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+# Add user to docker group to use Docker without sudo
+sudo usermod -aG docker $USER
+echo "Docker installed. You will need to log out and back in for docker group changes to take effect."
+
+# Install AWS CLI
+echo "Installing AWS CLI..."
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+rm -rf aws awscliv2.zip
+echo "AWS CLI installed. You can configure it later with 'aws configure'"
+
 # Install Ruby, RVM and gems
 echo "Installing Ruby, RVM and important gems..."
 gpg --keyserver hkp://keyserver.ubuntu.com --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
@@ -126,15 +195,6 @@ sudo apt install -y postgresql postgresql-contrib
 sudo systemctl enable postgresql
 sudo systemctl start postgresql
 
-# Install Docker
-echo "Installing Docker..."
-sudo apt install -y apt-transport-https ca-certificates gnupg lsb-release
-curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt update
-sudo apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
-sudo usermod -aG docker $USER
-
 # Create code directory and clone repositories
 echo "Creating code directory and cloning repositories..."
 mkdir -p ~/code
@@ -147,6 +207,9 @@ echo "- Fix keyboard settings"
 echo "- Fix terminator configs"
 echo "- Install aliases"
 echo "- Install Rust"
+echo "- Install Tesseract + Poppler Utils"
+echo "- Install FFMPEG + OBS" 
+
 
 echo "Installation complete! Some changes may require a system restart to take effect."
 echo "You may need to log out and log back in to use Docker without sudo."
