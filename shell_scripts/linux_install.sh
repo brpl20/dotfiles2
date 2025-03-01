@@ -29,7 +29,7 @@ sudo apt update && sudo apt upgrade -y
 
 # Install basic applications
 echo "Installing basic applications..."
-sudo apt install -y curl git imagemagick jq unzip vim zsh tree
+sudo apt install -y curl git imagemagick jq unzip vim zsh tree imagemagick
 
 # Install Terminator
 echo "Installing Terminator..."
