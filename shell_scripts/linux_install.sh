@@ -51,7 +51,8 @@ fi
 
 # Install Zsh syntax highlighting
 echo "Installing Zsh syntax highlighting..."
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+wget http://http.us.debian.org/debian/pool/main/z/zsh-syntax-highlighting/zsh-syntax-highlighting_0.7.1-2_all.deb
+# finish installing method with dpkg...
 
 # Install GitHub CLI and login
 echo "Installing GitHub CLI..."
@@ -183,11 +184,13 @@ curl -sSL https://get.rvm.io | bash -s stable --ruby
 source ~/.rvm/scripts/rvm
 gem install bundler pry rails
 
-# Install Node.js and npm
+# Install Node.js - npm - yarn ? - nvm 
 echo "Installing Node.js and npm..."
 curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
 sudo apt install -y nodejs
 sudo npm install -g yarn
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+# melhorar o versionamento aqui do NVM 
 
 # Install PostgreSQL
 echo "Installing PostgreSQL..."
