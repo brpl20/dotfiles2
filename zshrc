@@ -98,7 +98,7 @@ if [ "$os_type" = "Linux" ]; then
   export DESK="/home/brpl/Desktop"
   export DOWN="/home/brpl/Downloads"
   export BIGDOWN="/home/brpl/DOWNLOADS"
-  source /home/brpl/code/dotfiles2/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+  source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
 # ALIASES-BASE (LINUX AND MAC)
