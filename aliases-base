@@ -96,6 +96,8 @@ alias dot="cd $CODEF/dotfiles2"
 
 alias wab="cd $CODEF/whatsbot"
 alias wao="cd $CODEF/whats-organizer"
+alias wap="cd $CODEF/wap-uteis"
+alias crw="cd $CODEF/crawling"
 
 alias desk="cd $DESK"
 alias down="cd $DOWN"
