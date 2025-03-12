@@ -5,9 +5,7 @@ alias zshconfig="code ~/.zshrc"
 alias ex="exec zsh"
 
 # Git 
-alias gp="git push origin master"
-alias gpm="git push origin main"
-alias gst='git status'
+alias ghc="gh repo create"
 
 # Coding
 alias rs3="rails s -p 3001"
