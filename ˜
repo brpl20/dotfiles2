@@ -1,0 +1,106 @@
+# dotfiles2 aliaes 
+# Configs 
+alias myip="curl https://ipinfo.io/json" # or /ip for plain-text ip
+alias zshconfig="code ~/.zshrc"
+alias ex="exec zsh"
+
+# Coding
+alias rs3="rails s -p 3001"
+alias rs="rails s"
+alias dev="pnpm dev"
+alias rc="rails c"
+alias rdb="rails db:migrate"
+alias rdbd="rails db:drop"
+alias rdbc="rails db:create"
+alias py="python3"
+alias pip="pip3"
+alias pipi="pip3 install" 
+alias venv="python3 -m venv ."
+alias npi="npm install"
+alias ya="yarn"
+alias yai="yarn"
+
+# Mkdir and Cd Into 
+alias mkcd="mkcd"
+makedirandcdintodir() { mkdir "$1" && cd "$1"; }
+
+# Apps
+alias c.="code ."
+alias subl.= "subl ."
+alias z.="zed ."
+
+# System
+alias lla="ll -all"
+alias fall='find . -iname'
+alias bigtree='/Users/brpl20/code/dotfiles2/shell_scripts/big_tree.sh'
+
+# Define case-insensitive search
+lg() {
+    ll -a | grep -i "$@"
+}
+
+# Define case-sensitive search
+lG() {
+    ll -a | grep "$@"
+}
+
+alias ~="cd ~"
+alias .="cd .."
+alias ..="cd ../.."
+alias ...="cd ../../.."
+alias ....="cd ../../../.."
+alias cd..="cd .."
+
+# Rest of the aliases and Espanso 
+alias cataliases="cat $HOME/.aliases-base"
+alias edaliases="cd $CODEF/dotfiles2 && vim $CODEF/dotfiles2/aliases-base"
+alias catespanso="cat $ESPANSO/base.yml"
+alias edespanso="code $ESPANSO/base.yml"
+alias eduteis="code $GD/wikit/daily/uteisNew.md"
+
+# Locations
+alias gd="cd $GD"
+alias od="cd $OD"
+alias wi="cd $GD/wikit"
+alias daily="code $GD/wikit"
+alias uteis="nvim $GD/wikit/daily/uteisNew.md"
+alias codef="cd $CODEF"
+alias cf="cd $CODEF"
+
+alias lb="code $CODEF/learning-blog/_posts"
+alias lbf="cd $CODEF/learning-blog"
+alias lbup="sh $CODEF/learning-blog/github-learning-blog.sh"
+
+alias prc="cd $CODEF/procstudio_api"
+alias prcf="cd $CODEF/procstudio_front"
+alias prct="cd $CODEF/procstudio_testing/playwright"
+
+alias loro="open $GD/loro-pizza-gpt"
+alias lorotd="vim $GD/loro-pizza-gpt/todo-en.md"
+alias lorowab="cd $CODEF/loro-wbot"
+alias lorogpt="cd $CODEF/lorogpt"
+
+alias blog="code $CODEF/brpl-blog/_posts"
+alias blogf="cd $CODEF/brpl-blog"
+alias blogup="sh $CODEF/brpl-blog/gitup.sh"
+
+alias note="$GD/wikit/writing-bloging-videos/notebook-prj"
+
+alias blogadv="cd $CODEF/sftown-pellizzetti-associados-fe"
+alias blogart='function _artigo(){ touch "${1}.mdx" && cat $CODEF/dotfiles2/headermdx.txt > "${1}.mdx"; echo "The file ${1}.mdx has been created and populated with content from headermdx.txt."; }; _artigo'
+alias dot="cd $CODEF/dotfiles2"
+
+alias wab="cd $CODEF/whatsbot"
+alias wao="cd $CODEF/whats-organizer"
+alias wap="cd $CODEF/wap-uteis"
+alias crw="cd $CODEF/crawling"
+alias oab="cd $CODEF/oab-ocr"
+
+alias desk="cd $DESK"
+alias down="cd $DOWN"
+alias DOWN="cd $BIGDOWN"
+
+# Comandos Recorrentes
+alias pbel="lp -o landscape $GD/bel/organizador-bel.pdf"
+alias swap="sh $GD/lztforeverfiles/aws_swap.sh"
+alias sst="syncthing"
