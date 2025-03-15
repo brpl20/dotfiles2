@@ -47,6 +47,15 @@ lG() {
     ll -a | grep "$@"
 }
 
+# Fuzzy + Open
+fopen() {
+  local file
+  file=$(fzf)
+  if [[ -n "$file" ]]; then
+    open "$file"
+  fi
+}
+
 alias ~="cd ~"
 alias .="cd .."
 alias ..="cd ../.."
