@@ -87,6 +87,7 @@ alias prc="cd $CODEF/procstudio_api"
 alias prcf="cd $CODEF/procstudio_front"
 alias prct="cd $CODEF/procstudio_testing/playwright"
 alias prcp="cd $GD/procstudio-prc4"
+alias prcb="cd $GD/procstudio_blog"
 
 alias loro="open $GD/loro-pizza-gpt"
 alias lorotd="vim $GD/loro-pizza-gpt/todo-en.md"
