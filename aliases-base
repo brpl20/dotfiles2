@@ -120,4 +120,4 @@ alias sst="syncthing"
 
 # Apps e Scripts Shell 
 alias swap="sh $GD/lztforeverfiles/aws_swap.sh"
-echo 'alias cpdf="cd $CODEF/dotfiles2/shell_scripts/compress_pdf.sh"' >> ~/.zshrc
+alias cpdf="cd $CODEF/dotfiles2/shell_scripts/compress_pdf.sh"' >> ~/.zshrc
