@@ -7,9 +7,7 @@ alias ex="exec zsh"
 # Git 
 alias ghc="gh repo create"
 alias gi="$CODEF/dotfiles2/shell_scripts/git_ignore_generator.sh"
-echo "source ~/git-ignore-generator.sh" >> ~/.zshrc
-echo "alias gi='gi'" >> ~/.zshrc
-echo "alias gitignore='gitignore'" >> ~/.zshrc
+alias gitignore="$CODEF/dotfiles2/shell_scripts/git_ignore_generator.sh"
 
 
 
