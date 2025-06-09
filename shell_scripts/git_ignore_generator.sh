@@ -65,32 +65,46 @@ download_gitignore() {
     local url="https://raw.githubusercontent.com/github/gitignore/main/$gitignore_file"
     
     echo "📥 Downloading $gitignore_file..."
+    echo "🔗 URL: $url"
     
     if command -v curl &> /dev/null; then
-        curl -s -L "$url" -o .gitignore
+        local http_code
+        http_code=$(curl -s -L -w "%{http_code}" "$url" -o .gitignore)
+        
+        if [ "$http_code" -eq 200 ] && [ -s .gitignore ]; then
+            echo "✅ .gitignore file created successfully!"
+            echo "📄 Applied gitignore template: $gitignore_file"
+            return 0
+        else
+            echo "❌ Failed to download gitignore file. HTTP code: $http_code"
+            echo "🔗 Tried URL: $url"
+            rm -f .gitignore 2>/dev/null
+            return 1
+        fi
     elif command -v wget &> /dev/null; then
-        wget -q "$url" -O .gitignore
+        if wget -q "$url" -O .gitignore; then
+            if [ -s .gitignore ]; then
+                echo "✅ .gitignore file created successfully!"
+                echo "📄 Applied gitignore template: $gitignore_file"
+                return 0
+            fi
+        fi
+        echo "❌ Failed to download gitignore file."
+        echo "🔗 Tried URL: $url"
+        rm -f .gitignore 2>/dev/null
+        return 1
     else
         echo "❌ Neither curl nor wget is available. Please install one of them."
-        return 1
-    fi
-    
-    if [ $? -eq 0 ] && [ -s .gitignore ]; then
-        echo "✅ .gitignore file created successfully!"
-        echo "📄 Applied gitignore template: $gitignore_file"
-        return 0
-    else
-        echo "❌ Failed to download gitignore file. Please check your internet connection."
-        rm -f .gitignore 2>/dev/null
         return 1
     fi
 }
 
 # Function to select language using fuzzy finder
 select_language() {
-    echo "🔍 Select language/framework for .gitignore:"
-    echo "   (Type to search, use arrows to navigate, Enter to select)"
-    echo ""
+    # Send messages to stderr so they don't interfere with the return value
+    echo "🔍 Select language/framework for .gitignore:" >&2
+    echo "   (Type to search, use arrows to navigate, Enter to select)" >&2
+    echo "" >&2
     
     # Create a list of all keys for fzf
     local selected_key
@@ -103,19 +117,21 @@ select_language() {
         --preview-window=up:1)
     
     if [ -z "$selected_key" ]; then
-        echo "❌ No language selected. Exiting."
+        echo "❌ No language selected. Exiting." >&2
         return 1
     fi
     
+    # Only output the selected key to stdout (this is what gets captured)
     echo "$selected_key"
     return 0
 }
 
 # Function to handle multiple language selection
 select_multiple_languages() {
-    echo "🔍 Select languages/frameworks for .gitignore:"
-    echo "   (Use TAB to select multiple, Enter to confirm)"
-    echo ""
+    # Send messages to stderr so they don't interfere with the return value
+    echo "🔍 Select languages/frameworks for .gitignore:" >&2
+    echo "   (Use TAB to select multiple, Enter to confirm)" >&2
+    echo "" >&2
     
     local selected_keys
     selected_keys=$(printf '%s\n' "${!GITIGNORE_DICT[@]}" | sort | fzf \
@@ -128,10 +144,11 @@ select_multiple_languages() {
         --preview-window=up:1)
     
     if [ -z "$selected_keys" ]; then
-        echo "❌ No languages selected. Exiting."
+        echo "❌ No languages selected. Exiting." >&2
         return 1
     fi
     
+    # Only output the selected keys to stdout
     echo "$selected_keys"
     return 0
 }
@@ -213,11 +230,20 @@ gi() {
         local selected_language
         selected_language=$(select_language)
         
-        if [ $? -ne 0 ]; then
+        if [ $? -ne 0 ] || [ -z "$selected_language" ]; then
+            echo "❌ Language selection failed"
             return 1
         fi
         
+        echo "🎯 Selected language: $selected_language"
         local gitignore_file="${GITIGNORE_DICT[$selected_language]}"
+        echo "📋 Using template: $gitignore_file"
+        
+        if [ -z "$gitignore_file" ]; then
+            echo "❌ No template found for: $selected_language"
+            return 1
+        fi
+        
         download_gitignore "$gitignore_file"
     fi
     
@@ -314,11 +340,19 @@ gitignore() {
         local selected_language
         selected_language=$(select_language)
         
-        if [ $? -ne 0 ]; then
+        if [ $? -ne 0 ] || [ -z "$selected_language" ]; then
+            echo "❌ Language selection failed"
             return 1
         fi
         
+        echo "🎯 Selected language: $selected_language"
         local gitignore_file="${GITIGNORE_DICT[$selected_language]}"
+        echo "📋 Using template: $gitignore_file"
+        
+        if [ -z "$gitignore_file" ]; then
+            echo "❌ No template found for: $selected_language"
+            return 1
+        fi
         
         if [ "$choice" = "2" ]; then
             # Append mode
@@ -328,16 +362,23 @@ gitignore() {
             echo "# ========================================" >> .gitignore
             
             local url="https://raw.githubusercontent.com/github/gitignore/main/$gitignore_file"
+            echo "🔗 Appending from: $url"
             
             if command -v curl &> /dev/null; then
-                curl -s -L "$url" >> .gitignore
+                local http_code
+                http_code=$(curl -s -L -w "%{http_code}" "$url" >> .gitignore)
+                if [ "$http_code" -ne 200 ]; then
+                    echo "❌ Failed to append. HTTP code: $http_code"
+                    return 1
+                fi
             elif command -v wget &> /dev/null; then
-                wget -q "$url" -O - >> .gitignore
+                if ! wget -q "$url" -O - >> .gitignore; then
+                    echo "❌ Failed to append patterns"
+                    return 1
+                fi
             fi
             
-            if [ $? -eq 0 ]; then
-                echo "✅ Patterns appended to .gitignore successfully!"
-            fi
+            echo "✅ Patterns appended to .gitignore successfully!"
         else
             # Overwrite mode
             download_gitignore "$gitignore_file"
