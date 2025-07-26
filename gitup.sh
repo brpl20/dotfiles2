@@ -3,6 +3,7 @@ cp aliases-base $HOME/.aliases-base
 cp aliases-linux $HOME/.aliases-linux
 cp aliases-mac $HOME/.aliases-mac
 cp zshrc $HOME/.zshrc
+cp zshrc-minimal $HOME/.zhrc
 
 # Check the status of the git repository
 git status
