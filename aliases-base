@@ -1,17 +1,26 @@
-# dotfiles2 aliaes 
-# Configs 
+# dotfiles2 aliaes
+# Configs
 alias myip="curl https://ipinfo.io/json" # or /ip for plain-text ip
 alias zshconfig="code ~/.zshrc"
-alias ex="exec zsh"
 
-# Git 
+# Git
 alias ghc="gh repo create"
 alias gi="$CODEF/dotfiles2/shell_scripts/git_ignore_generator.sh"
 alias gitignore="$CODEF/dotfiles2/shell_scripts/git_ignore_generator.sh"
+alias gaa='git add --all'
+alias gcam='git commit -a -m'
+alias gl='git pull'
+alias ggpull='git pull origin "$(git_current_branch)"'
+alias ggp='git push origin $(current_branch)'
+alias gp='git push'
+alias gpu='git push upstream'
+alias gst='git status'
+
 
 # Servers
 alias h1="ssh brpl@168.231.90.14"
 alias h2="ssh brpl@168.231.91.47"
+alias v1="ssh brpl@216.238.117.64"
 
 # Coding
 alias rs3="rails s -p 3001"
@@ -23,13 +32,13 @@ alias rdbd="rails db:drop"
 alias rdbc="rails db:create"
 alias py="python3"
 alias pip="pip3"
-alias pipi="pip3 install" 
+alias pipi="pip3 install"
 alias venv="python3 -m venv ."
 alias npi="npm install"
 alias ya="yarn"
 alias yai="yarn"
 
-# Mkdir and Cd Into 
+# Mkdir and Cd Into
 alias mkcd="mkcd"
 makedirandcdintodir() { mkdir "$1" && cd "$1"; }
 
@@ -41,7 +50,14 @@ alias z.="zed ."
 # System
 alias lla="ll -all"
 alias fall='find . -iname'
-alias bigtree='/Users/brpl20/code/dotfiles2/shell_scripts/big_tree.sh'
+alias l='ls -lah'
+alias la='ls -lAh'
+alias ll='ls -lh'
+alias ls='ls -G'
+alias lsa='ls -lah'
+
+
+alias bigtree='/Users/brpl/code/dotfiles2/shell_scripts/big_tree.sh'
 
 # Define case-insensitive search
 lg() {
@@ -69,7 +85,7 @@ alias ...="cd ../../.."
 alias ....="cd ../../../.."
 alias cd..="cd .."
 
-# Rest of the aliases and Espanso 
+# Rest of the aliases and Espanso
 alias cataliases="cat $HOME/.aliases-base"
 alias edaliases="cd $CODEF/dotfiles2 && vim $CODEF/dotfiles2/aliases-base"
 alias catespanso="cat $ESPANSO/base.yml"
@@ -85,31 +101,36 @@ alias uteis="nvim $GD/wikit/daily/uteisNew.md"
 alias codef="cd $CODEF"
 alias cf="cd $CODEF"
 
-alias lb="code $CODEF/learning-blog/_posts"
-alias lbf="cd $CODEF/learning-blog"
-alias lbup="sh $CODEF/learning-blog/github-learning-blog.sh"
-
-alias prc="cd $CODEF/procstudio_api"
-alias prcf="cd $CODEF/procstudio_front"
-alias prct="cd $CODEF/procstudio_testing/playwright"
+# ProcStudio
+alias prc="cd $CODEF/prc_api"
+alias prcf="cd $CODEF/prc_admin-fe"
+alias prcfc="cd $CODEF/prc_client-fe"
+alias prct="cd $CODEF/procstudio_tests"
 alias prcp="cd $GD/procstudio-prc4"
 alias prcb="cd $CODEF/procstudio_blog"
 
-alias loro="open $GD/loro-pizza-gpt"
-alias lorotd="vim $GD/loro-pizza-gpt/todo-en.md"
-alias lorowab="cd $CODEF/loro-wbot"
-alias lorogpt="cd $CODEF/lorogpt"
+# ProcStudioIA
+alias prcia="cd $CODEF/ProcStudioIA"
+alias prclab="cd $CODEF/procstudio_ia_components_lab"
+# td: Criar procstudio
 
+# ProcStudio APIS/Scrapers
+alias prcld="cd $CODEF/legal_data_api"
+alias prcoab="cd $CODEF/oab_sa"
+alias prcocr="cd $CODEF/procstudio_ocr"
+
+# BrplBLog
 alias blog="code $CODEF/brpl-blog/_posts"
 alias blogf="cd $CODEF/brpl-blog"
 alias blogup="sh $CODEF/brpl-blog/gitup.sh"
 
-alias note="$GD/wikit/writing-bloging-videos/notebook-prj"
-
+# Advocacia => Passar para os pias
 alias blogadv="cd $CODEF/sftown-pellizzetti-associados-fe"
 alias blogart='function _artigo(){ touch "${1}.mdx" && cat $CODEF/dotfiles2/headermdx.txt > "${1}.mdx"; echo "The file ${1}.mdx has been created and populated with content from headermdx.txt."; }; _artigo'
+
 alias dot="cd $CODEF/dotfiles2"
 
+# Uteis
 alias wab="cd $CODEF/whatsbot"
 alias wao="cd $CODEF/whats-organizer"
 alias wap="cd $CODEF/wap-uteis"
@@ -121,9 +142,7 @@ alias down="cd $DOWN"
 alias DOWN="cd $BIGDOWN"
 
 # Comandos Recorrentes
-alias pbel="lp -o landscape $GD/bel/organizador-bel.pdf"
 alias sst="syncthing"
 
-# Apps e Scripts Shell 
+# Apps e Scripts Shell
 alias swap="sh $GD/lztforeverfiles/aws_swap.sh"
-alias cpdf="cd $CODEF/dotfiles2/shell_scripts/compress_pdf.sh"' >> ~/.zshrc

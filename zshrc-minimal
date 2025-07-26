@@ -1,0 +1,165 @@
+# .zshrc - Clean version
+# Move to directories without cd
+setopt autocd
+
+# Additional useful options
+setopt AUTO_LIST
+setopt AUTO_MENU
+setopt AUTO_PARAM_SLASH
+setopt COMPLETE_IN_WORD
+setopt ALWAYS_TO_END
+setopt HASH_LIST_ALL
+setopt COMPLETEALIASES
+setopt EXTENDED_GLOB
+
+# Initialize completion system with enhanced options
+autoload -U compinit
+compinit
+
+# Enhanced completion settings
+zstyle ':completion:*' menu select=2
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' completer _complete _match _approximate
+zstyle ':completion:*:match:*' original only
+zstyle ':completion:*:approximate:*' max-errors 1 numeric
+zstyle ':completion:*:*:cd:*' tag-order local-directories directory-stack path-directories
+zstyle ':completion:*:*:cd:*:directory-stack' menu yes select
+zstyle ':completion:*:-tilde-:*' group-order 'named-directories' 'path-directories' 'users' 'expand'
+zstyle ':completion:*' squeeze-slashes true
+zstyle ':completion:*' special-dirs true
+
+# Enable completion caching
+zstyle ':completion::complete:*' use-cache 1
+zstyle ':completion::complete:*' cache-path ~/.zsh/cache
+
+# Better completion for kill command
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
+zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm -w -w"
+
+# Group matches and describe
+zstyle ':completion:*:matches' group 'yes'
+zstyle ':completion:*:options' description 'yes'
+zstyle ':completion:*:options' auto-description '%d'
+zstyle ':completion:*:corrections' format ' %F{green}-- %d (errors: %e) --%f'
+zstyle ':completion:*:descriptions' format ' %F{yellow}-- %d --%f'
+zstyle ':completion:*:messages' format ' %F{purple} -- %d --%f'
+zstyle ':completion:*:warnings' format ' %F{red}-- no matches found --%f'
+zstyle ':completion:*:default' list-prompt '%S%M matches%s'
+
+# Case insensitive completion
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+
+# Partial completion suggestions
+zstyle ':completion:*' list-suffixes
+zstyle ':completion:*' expand prefix suffix
+
+# Key bindings for better navigation
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+bindkey '^[[1;5C' forward-word
+bindkey '^[[1;5D' backward-word
+
+# Load menuselect keymap and set vim-style navigation
+zmodload zsh/complist
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
+bindkey -M menuselect '^[[Z' reverse-menu-complete
+
+# Create cache directory for completions
+mkdir -p ~/.zsh/cache
+
+# Variables Settings
+if [[ "$(uname)" == "Darwin" ]]; then
+  export CODEF="/Users/brpl/code"
+  export CODEFSSD="/Volumes/BPSSD/codessd"
+  export DESK="/Users/brpl/Desktop"
+  export DOWN="/Users/brpl/Downloads"
+  export BIGDOWN="/Volumes/BPSSD/DOWNLOADS"
+fi
+
+# Add atuin to PATH first
+export PATH="$HOME/.atuin/bin:$HOME/.local/bin:$PATH"
+
+# Source aliases files
+if [[ -f "$HOME/.aliases-mac" ]]; then
+  source "$HOME/.aliases-mac"
+else
+  echo "Warning: $HOME/.aliases-mac not found."
+fi
+
+if [[ -f "$HOME/.aliases-base" ]]; then
+  source "$HOME/.aliases-base"
+else
+  echo "Warning: $HOME/.aliases-base not found."
+fi
+
+# Set up fzf key bindings and fuzzy completion
+if command -v fzf &> /dev/null; then
+  source <(fzf --zsh)
+fi
+
+# Set up atuin (with proper checks)
+if [[ -f "$HOME/.atuin/bin/env" ]]; then
+  source "$HOME/.atuin/bin/env"
+fi
+
+if command -v atuin &> /dev/null; then
+  eval "$(atuin init zsh)"
+fi
+
+# Set up starship prompt
+if command -v starship &> /dev/null; then
+  eval "$(starship init zsh)"
+fi
+
+# Git Helpers
+# Helper functions (add these to your shell config)
+git_main_branch() {
+  command git rev-parse --git-dir &>/dev/null || return
+  local ref
+  for ref in refs/{heads,remotes/{origin,upstream}}/{main,trunk,mainline,default}; do
+    if command git show-ref -q --verify $ref; then
+      echo ${ref:t}
+      return
+    fi
+  done
+  echo master
+}
+
+git_develop_branch() {
+  command git rev-parse --git-dir &>/dev/null || return
+  local ref
+  for ref in refs/{heads,remotes/{origin,upstream}}/{dev,devel,develop,development}; do
+    if command git show-ref -q --verify $ref; then
+      echo ${ref:t}
+      return
+    fi
+  done
+  echo develop
+}
+
+git_current_branch() {
+  local ref
+  ref=$(command git symbolic-ref --quiet HEAD 2> /dev/null)
+  local ret=$?
+  if [[ $ret != 0 ]]; then
+    [[ $ret == 128 ]] && return  # no git repo.
+    ref=$(command git rev-parse --short HEAD 2> /dev/null) || return
+  fi
+  echo ${ref#refs/heads/}
+}
+
+current_branch() {
+  git_current_branch
+}
+
+npd() {
+    local port=${1:-5173}  # Default to 5173 if no port specified
+    npm run dev &
+    sleep 3
+    open "http://localhost:$port"
+    wait
+}

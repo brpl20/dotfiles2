@@ -1,14 +1,17 @@
-# Grep Fast SS 
+# Aliases Mac
+alias pwdc='pwd | pbcopy'
+alias ssd='cd /Volumes/BPSSD'
+alias o="open ."
+
+# Grep Fast SS
 # alias s="grep 'YOUR_TERM' "
-
 alias ss="search_term_in_my_file"
-
 search_term_in_my_file() {
-    local file="/Users/brpl20/Library/CloudStorage/GoogleDrive-pelli.br@gmail.com/Meu Drive/wikit/daily/uteisNew.md"
-
+    local file="/volumes/BPSSD/gd/wikit/daily/uteisNew.md"
     if [[ "$1" == "#" ]]; then
-        # New approach: search for sections
+        # New approach: search for sections (case insensitive)
         awk -v term="# $2" '
+        BEGIN { IGNORECASE = 1 }
         $0 ~ "^" term {
             found = 1
             print
@@ -22,18 +25,9 @@ search_term_in_my_file() {
             found = 0
         }
         ' "$file" | tee >(pbcopy)
-
     else
-        # Original approach: grep search
-        # grep "$1" "$file" | awk -F'=> ' '{print $2}' | awk '{print $1}' | tee >(pbcopy)
-        # grep "$1" "$file"
-        grep "$1" "$file" | awk -F'=> ' '{print $2}' | awk '{print $1}' | pbcopy
-        grep "$1" "$file"
+        # Original approach: grep search (case insensitive)
+        grep -i "$1" "$file" | awk -F'=> ' '{print $2}' | awk '{print $1}' | pbcopy
+        grep -i "$1" "$file"
     fi
 }
-
-# Other Aliases 
-alias pwdc='pwd | pbcopy'
-alias ssd='cd /Volumes/BPSSD'
-alias typescript='cd /Volumes/BPSSD/DOWNLOADS/Coding - TypeScript'
-alias tailscale='/Applications/Tailscale.app/Contents/MacOS/Tailscale'
