@@ -20,7 +20,9 @@ alias gst='git status'
 # Servers
 alias h1="ssh brpl@168.231.90.14"
 alias h2="ssh brpl@168.231.91.47"
+alias h3="ssh brpl@212.85.13.30"
 alias v1="ssh brpl@216.238.117.64"
+
 
 # Coding
 alias rs3="rails s -p 3001"
