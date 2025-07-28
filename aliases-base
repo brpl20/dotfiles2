@@ -41,7 +41,7 @@ alias ya="yarn"
 alias yai="yarn"
 
 # Mkdir and Cd Into
-alias mkcd="mkcd"
+alias mkcd="makedirandcdintodir"
 makedirandcdintodir() { mkdir "$1" && cd "$1"; }
 
 # Apps
@@ -99,9 +99,9 @@ alias gd="cd $GD"
 alias od="cd $OD"
 alias wi="cd $GD/wikit"
 alias daily="code $GD/wikit"
-alias uteis="nvim $GD/wikit/daily/uteisNew.md"
-alias codef="cd $CODEF"
+alias uteis="vim $GD/wikit/daily/uteisNew.md"
 alias cf="cd $CODEF"
+alias n8n="cd $GD/n8n"
 
 # ProcStudio
 alias prc="cd $CODEF/prc_api"

@@ -78,6 +78,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
   export DESK="/Users/brpl/Desktop"
   export DOWN="/Users/brpl/Downloads"
   export BIGDOWN="/Volumes/BPSSD/DOWNLOADS"
+  export GD="/Volumes/BPSSD/DOWNLOADS"
 fi
 
 # Add atuin to PATH first
