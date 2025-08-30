@@ -4,41 +4,44 @@ alias myip="curl https://ipinfo.io/json" # or /ip for plain-text ip
 alias zshconfig="code ~/.zshrc"
 
 # Git
-alias ghc="gh repo create"
-alias gi="$CODEF/dotfiles2/shell_scripts/git_ignore_generator.sh"
-alias gitignore="$CODEF/dotfiles2/shell_scripts/git_ignore_generator.sh"
+alias gst='git status'
 alias gaa='git add --all'
 alias gcam='git commit -a -m'
+alias ghc="gh repo create"
 alias gl='git pull'
 alias ggpull='git pull origin "$(git_current_branch)"'
 alias ggp='git push origin $(current_branch)'
 alias gp='git push'
 alias gpu='git push upstream'
-alias gst='git status'
-
 
 # Servers
 alias h1="ssh brpl@168.231.90.14"
 alias h2="ssh brpl@168.231.91.47"
 alias h3="ssh brpl@212.85.13.30"
-alias v1="ssh brpl@216.238.117.64"
-
 
 # Coding
+## Rails
 alias rs3="rails s -p 3001"
 alias rs="rails s"
-alias dev="pnpm dev"
 alias rc="rails c"
 alias rdb="rails db:migrate"
 alias rdbd="rails db:drop"
 alias rdbc="rails db:create"
+alias rdbs="rails db:seed"
+alias rdreset="rails db:drop | rails db:create | rails db:migrate | rails db:seed"
+
+## Ruby
+alias rb="ruby"
+
+## Python
 alias py="python3"
 alias pip="pip3"
-alias pipi="pip3 install"
 alias venv="python3 -m venv ."
+
+## Node
 alias npi="npm install"
-alias ya="yarn"
-alias yai="yarn"
+alias npmb="npm run build"
+alias npms="npm run dev" 
 
 # Mkdir and Cd Into
 alias mkcd="makedirandcdintodir"
@@ -46,8 +49,8 @@ makedirandcdintodir() { mkdir "$1" && cd "$1"; }
 
 # Apps
 alias c.="code ."
-alias subl.= "subl ."
 alias z.="zed ."
+alias o.="open ."
 
 # System
 alias lla="ll -all"
@@ -57,7 +60,6 @@ alias la='ls -lAh'
 alias ll='ls -lh'
 alias ls='ls -G'
 alias lsa='ls -lah'
-
 
 alias bigtree='/Users/brpl/code/dotfiles2/shell_scripts/big_tree.sh'
 
