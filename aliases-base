@@ -41,7 +41,7 @@ alias venv="python3 -m venv ."
 ## Node
 alias npi="npm install"
 alias npmb="npm run build"
-alias npms="npm run dev" 
+alias npms="npm run dev"
 
 # Mkdir and Cd Into
 alias mkcd="makedirandcdintodir"
@@ -107,10 +107,8 @@ alias n8n="cd $GD/n8n"
 
 # ProcStudio
 alias prc="cd $CODEF/prc_api"
-alias prcf="cd $CODEF/prc_admin-fe"
-alias prcfc="cd $CODEF/prc_client-fe"
-alias prct="cd $CODEF/procstudio_tests"
-alias prcp="cd $GD/procstudio-prc4"
+alias prcf="cd $CODEF/prc_api/frontend"
+alias prct="cd $CODEF/prc_api/tests"
 alias prcb="cd $CODEF/procstudio_blog"
 
 # ProcStudioIA
