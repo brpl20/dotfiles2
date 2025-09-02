@@ -110,7 +110,7 @@ alias prc="cd $CODEF/prc_api"
 alias prcf="cd $CODEF/prc_api/frontend"
 alias prct="cd $CODEF/prc_api/tests"
 alias prcb="cd $CODEF/procstudio_blog"
-alias prcd="cd $CODEF/procstudio/docs"
+alias prcd="cd $CODEF/prc_api/docs"
 
 
 # ProcStudioIA
