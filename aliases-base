@@ -148,8 +148,10 @@ alias DOWN="cd $BIGDOWN"
 alias sst="syncthing"
 alias cpf="node ~/code/ProcStudio/tests/helpers/cpf_generator.js"
 alias cnpj="node ~/code/ProcStudio/tests/helpers/cnpj_generator.js"
-#alias s3last="aws s3 ls s3://prcstudio3herokubucket/ --recursive | sort | tail -n 2"
-alias s3last="tail_count=2; aws s3 ls s3://prcstudio3herokubucket/ --recursive | sort | tail -n \$tail_count"
+s3last() {
+    local count=${1:-2}  # Default to 2 if no parameter given
+    aws s3 ls s3://prcstudio3herokubucket/ --recursive | sort | tail -n $count
+}
 
 # Apps e Scripts Shell
 alias swap="sh $GD/lztforeverfiles/aws_swap.sh"
