@@ -111,6 +111,11 @@ if command -v atuin &> /dev/null; then
   eval "$(atuin init zsh)"
 fi
 
+# Set up rbenv
+if command -v rbenv &> /dev/null; then
+  eval "$(rbenv init - zsh)"
+fi
+
 # Set up starship prompt
 if command -v starship &> /dev/null; then
   eval "$(starship init zsh)"

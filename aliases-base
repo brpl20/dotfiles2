@@ -106,12 +106,11 @@ alias cf="cd $CODEF"
 alias n8n="cd $GD/n8n"
 
 # ProcStudio
-alias prc="cd $CODEF/prc_api"
-alias prcf="cd $CODEF/prc_api/frontend"
-alias prct="cd $CODEF/prc_api/tests"
+alias prc="cd $CODEF/ProcStudio"
+alias prcf="cd $CODEF/ProcStudio/frontend"
+alias prct="cd $CODEF/ProcStudio/tests"
 alias prcb="cd $CODEF/procstudio_blog"
-alias prcd="cd $CODEF/prc_api/docs"
-
+alias prcd="cd $CODEF/ProcStudio/docs"
 
 # ProcStudioIA
 alias prcia="cd $CODEF/ProcStudioIA"
@@ -145,8 +144,12 @@ alias desk="cd $DESK"
 alias down="cd $DOWN"
 alias DOWN="cd $BIGDOWN"
 
-# Comandos Recorrentes
+# Comandos Recorrentes Globais
 alias sst="syncthing"
+alias cpf="node ~/code/ProcStudio/tests/helpers/cpf_generator.js"
+alias cnpj="node ~/code/ProcStudio/tests/helpers/cnpj_generator.js"
+#alias s3last="aws s3 ls s3://prcstudio3herokubucket/ --recursive | sort | tail -n 2"
+alias s3last="tail_count=2; aws s3 ls s3://prcstudio3herokubucket/ --recursive | sort | tail -n \$tail_count"
 
 # Apps e Scripts Shell
 alias swap="sh $GD/lztforeverfiles/aws_swap.sh"
