@@ -1,1 +1,0 @@
-https://lucasoshiro.github.io/posts-en/2024-06-17-ruby-shellscript/?utm_source=hackernewsletter&utm_medium=email&utm_term=code
