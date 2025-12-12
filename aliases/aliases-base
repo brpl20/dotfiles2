@@ -41,7 +41,7 @@ alias venv="python3 -m venv ."
 ## Node
 alias npi="npm install"
 alias npmb="npm run build"
-alias npms="npm run dev"
+alias npmd="npm run dev"
 
 # Mkdir and Cd Into
 alias mkcd="makedirandcdintodir"
@@ -50,6 +50,8 @@ makedirandcdintodir() { mkdir "$1" && cd "$1"; }
 # Apps
 alias c.="code ."
 alias z.="zed ."
+alias n.="nvim ."
+alias v.="vim ."
 alias o.="open ."
 
 # System
@@ -93,8 +95,8 @@ alias cd..="cd .."
 alias cataliases="cat $HOME/.aliases-base"
 alias edaliases="cd $CODEF/dotfiles2 && vim $CODEF/dotfiles2/aliases-base"
 alias catespanso="cat $ESPANSO/base.yml"
-alias edespanso="code $ESPANSO/base.yml"
-alias eduteis="code $GD/wikit/daily/uteisNew.md"
+alias edespanso="$EDITOR2 $ESPANSO/base.yml"
+alias eduteis="$EDITORS $GD/wikit/daily/uteisNew.md"
 
 # Locations
 alias gd="cd $GD"
@@ -107,9 +109,10 @@ alias n8n="cd $GD/n8n"
 
 # ProcStudio
 alias prc="cd $CODEF/ProcStudio"
+alias prcb="cd $CODEF/ProcStudio/api"
 alias prcf="cd $CODEF/ProcStudio/frontend"
 alias prct="cd $CODEF/ProcStudio/tests"
-alias prcb="cd $CODEF/procstudio_blog"
+alias prcblog="cd $CODEF/procstudio_blog"
 alias prcd="cd $CODEF/ProcStudio/docs"
 
 # ProcStudioIA
