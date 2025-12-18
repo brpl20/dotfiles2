@@ -53,6 +53,8 @@ alias z.="zed ."
 alias n.="nvim ."
 alias v.="vim ."
 alias o.="open ."
+alias cl="claude"
+alias cx="codex"
 
 # System
 alias lla="ll -all"
@@ -114,11 +116,6 @@ alias prcf="cd $CODEF/ProcStudio/frontend"
 alias prct="cd $CODEF/ProcStudio/tests"
 alias prcblog="cd $CODEF/procstudio_blog"
 alias prcd="cd $CODEF/ProcStudio/docs"
-
-# ProcStudioIA
-alias prcia="cd $CODEF/ProcStudioIA"
-alias prclab="cd $CODEF/procstudio_ia_components_lab"
-# td: Criar procstudio
 
 # ProcStudio APIS/Scrapers
 alias prcld="cd $CODEF/legal_data_api"
