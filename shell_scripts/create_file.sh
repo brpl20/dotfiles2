@@ -1,4 +1,6 @@
 #!/bin/bash
+# This is for context button in file explore not terminal which 
+# we can easily do touch
 
 echo "Enter the file name (without extension):"
 read filename
