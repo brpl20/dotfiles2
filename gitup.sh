@@ -1,45 +1,5 @@
 #!/bin/bash
 
-# Function to display menu and get user choice
-select_zshrc_config() {
-    echo "Please select your zshrc configuration:"
-    echo "1) Full zshrc (complete configuration)"
-    echo "2) Minimal zshrc (lightweight configuration)"
-    echo "3) Skip zshrc setup"
-
-    while true; do
-        read -p "Enter your choice (1-3): " choice
-        case $choice in
-            1)
-                echo "Selected: Full zshrc configuration"
-                cp zshrc $HOME/.zshrc
-                echo "✓ Copied zshrc to ~/.zshrc"
-                break
-                ;;
-            2)
-                echo "Selected: Minimal zshrc configuration"
-                cp zshrc-minimal $HOME/.zshrc
-                echo "✓ Copied zshrc-minimal to ~/.zshrc"
-                break
-                ;;
-            3)
-                echo "Skipping zshrc setup"
-                break
-                ;;
-            *)
-                echo "Invalid choice. Please enter 1, 2, or 3."
-                ;;
-        esac
-    done
-}
-
-# Copy alias files
-echo "Setting up alias files..."
-cp aliases-base $HOME/.aliases-base
-cp aliases-linux $HOME/.aliases-linux
-cp aliases-mac $HOME/.aliases-mac
-echo "✓ Alias files copied successfully"
-
 # Let user select zshrc configuration
 select_zshrc_config
 
@@ -56,6 +16,8 @@ echo "Pulling latest changes..."
 git pull
 if [ $? -ne 0 ]; then
     echo "❌ git pull failed. Exiting."
+    echo "trying Add"
+    git add .
     exit 1
 fi
 
