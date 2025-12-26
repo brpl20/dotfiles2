@@ -134,6 +134,9 @@ npd() {
 # SOURCE CUSTOM ALIASES
 # =============================================================================
 
+# Source base aliases (symlinked from dotfiles2)
+[[ -f "$HOME/.aliases-base" ]] && source "$HOME/.aliases-base"
+
 # Source git aliases
 DOTFILES_DIR="${DOTFILES_DIR:-$HOME/code/dotfiles2/arch}"
 
