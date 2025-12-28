@@ -54,7 +54,9 @@ alias n.="nvim ."
 alias v.="vim ."
 alias o.="open ."
 alias cl="claude"
+alias cld="claude --dangerously-skip-permissions"
 alias cx="codex"
+alias oc="opencode"
 
 # System
 alias lla="ll -all"
