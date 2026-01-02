@@ -140,7 +140,6 @@ alias wab="cd $CODEF/whatsbot"
 alias wao="cd $CODEF/whats-organizer"
 alias wap="cd $CODEF/wap-uteis"
 alias crw="cd $CODEF/crawling"
-alias oab="cd $CODEF/oab_ocr"
 
 alias desk="cd $DESK"
 alias down="cd $DOWN"
@@ -148,8 +147,10 @@ alias DOWN="cd $BIGDOWN"
 
 # Comandos Recorrentes Globais
 alias sst="syncthing"
-alias cpf="node ~/code/ProcStudio/tests/helpers/cpf_generator.js"
-alias cnpj="node ~/code/ProcStudio/tests/helpers/cnpj_generator.js"
+alias cpf="node ~/code/ProcStudio/ai-tools/cpf_generator.js"
+alias cnpj="node ~/code/ProcStudio/ai-tools/cnpj_generator.js"
+alias cep="node ~/code/ProcStudio/ai-tools/cep_generator.js"
+alias oab="node ~/code/ProcStudio/ai-tools/oab_generator.js"
 s3last() {
     local count=${1:-2}  # Default to 2 if no parameter given
     aws s3 ls s3://prcstudio3herokubucket/ --recursive | sort | tail -n $count

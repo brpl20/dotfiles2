@@ -1,0 +1,225 @@
+key_delay: 200
+inject_delay: 200
+
+matches:
+  # Personal Info
+  - trigger: "eu;"
+    replace: "Bruno Pellizzetti\n05880253996\n"
+
+  - trigger: "bp;"
+    replace: "Bruno Pellizzetti"
+
+  - trigger: "qual;"
+    replace: "Bruno Pellizzetti, brasileiro, casado, RG 7.059.987-2, CPF 058.802.539-96, residente e domiciliado à Rua Rui Barbosa, 262, Centro, Cascavel - PR"
+
+  - trigger: "pr;"
+    replace: "PR054159"
+
+  - trigger: "gl;"
+    replace: "Glock5898@#"
+
+  - trigger: "058"
+    replace: "05880253996"
+
+  # Atendimentos
+  - trigger: "cal;"
+    replace: "Atendimento: {{link}}"
+    vars:
+      - name: link
+        type: choice
+        params:
+          values:
+            - "https://cal.com/brpl/chamada-longa-dia"
+            - "https://cal.com/brpl/chamada-longa-manha"
+            - "https://cal.com/brpl/chamada-longa-tarde"
+            - "https://cal.com/brpl/chamada-longa-noite"
+            - "https://cal.com/brpl/chamada-rapida-dia"
+
+            - "https://cal.com/brpl/chamada-rapida-manha"
+            - "https://cal.com/brpl/chamada-rapida-tarde"
+            - "https://cal.com/brpl/chamada-rapida-noite"
+            - "https://cal.com/brpl/atendimento-presencial"
+
+  # Endereços
+  - trigger: "end;"
+    replace: "Rua Paraná, 3033 Ed. Formato, 14o Andar, Centro, Cascavel - PR"
+
+  - trigger: "end;"
+    replace: "R. Riachuelo, 2626, Ap 31, Country, Cascavel - PR (CEP: 85813-310)"
+
+  - trigger: "end;"
+    replace: "Rua Rui Barbosa, 262, Ap 703, Centro, Cascavel - PR"
+
+  # Bancos
+  - trigger: "ccesc;"
+    replace: "Conta Pessoa Juririca: Banco Nubank (260) Ag. 1 Cc. 62861734-3 Pellizzetti e Walber CNPJ: 49780032/0001-46"
+
+  - trigger: "ccpf;"
+    replace: "Conta Pessoa Física: Banco Nubank (260) Ag. 1 Cc. 40249656-0 Pellizzetti e Walber CNPJ: 49780032/0001-46"
+
+  # Emails
+  - trigger: "mail;"
+    replace: "adv5898@gmail.com"
+
+  - trigger: "mail;"
+    replace: "pelli.br.sp@gmail.com"
+
+  - trigger: "mail;"
+    replace: "pelli.br@gmail.com"
+
+  # Videos do Youtube e Insta
+  - trigger: "yt;"
+    replace: "https://www.youtube.com/@brunopellizzetti"
+
+  - trigger: "ig;"
+    replace: "https://www.instagram.com/brunopellizzetti/"
+
+  # Facilitadores
+  - trigger: "meu;"
+    replace: "Faz o cadastro do Meu INSS. Acessa uma vez. Vai ter que responder umas perguntas pessoais. Depois me passa a senha: https://meu.inss.gov.br"
+
+  - trigger: "meusenha;"
+    replace: "Tem o login (CPF) e senha do Meu INSS?"
+
+  - trigger: "sn;"
+    replace: "Sem novidades ainda. Só aguardar."
+
+  - trigger: "bd;"
+    replace: "Bom dia, tudo em paz?"
+
+  - trigger: "bt;"
+    replace: "Boa tarde, tudo em paz? "
+
+  - trigger: "bn;"
+    replace: "Boa noite, tudo em paz? "
+
+  - trigger: "abc;"
+    replace: "Abraço, Bruno."
+
+  # Coding and Terminal
+  - trigger: "cl;"
+    replace: "console.log($|$);"
+
+  - trigger: "pause;"
+    replace: "await this.page.pause();"
+
+  - trigger: "pub;"
+    replace: "published: true"
+
+  - trigger: "x;"
+    replace: "x = Office.last\n"
+
+  - trigger: "u;"
+    replace: "u = UserProfile.last\n"
+
+  - trigger: "o;"
+    replace: "o = DocxServices::FormatterOffices.new(x)\n"
+
+  - trigger: "q;"
+    replace: "q = DocxServices::FormatterQualification.new(u)\n"
+
+  # Claude Code
+  - trigger: "//"
+    replace: "gaa gcam gp { follow Conventional Commits rules }"
+
+  - trigger: "//"
+    replace: "code review: please act as a senior developer reviewing a junior code. Check for code quality, dry princples and clean code. Follow Rails 8 best rules and conventions for backend and Svelte 5 rules and conventions if you are reviewing the frontend"
+
+  - trigger: "//"
+    replace: "give me the endpoints and a JSON request for each one of them - only one request is enough - the most complete possible"
+
+  - trigger: "//"
+    replace: "please create an detailed report of what is being done until now and the next steps for the next agent"
+
+  - trigger: "//"
+    replace: "As QA and code specialist check the last commit and inspect code quality and check if there is any improvements to be done to the code be more consise, follow dry rules and software development best practices;"
+
+  - trigger: "//"
+    replace: "Study Svelte 5 runes at ./ai-docs/svelte-medium.txt if you can't get information there please go to: svelte-full.txt. We need to ($|$)"
+
+  - trigger: "//"
+    replace: "At /Users/brpl/code/ProcStudio/docs create a documentation about ($|$) . Update the README.md to insert it into the README.me ## Índice for future reference - please write it in Brazilian Portuguese please"
+
+  # - trigger: "//"
+  # replace: "Please act as a senior TypeScript developer to help me with this code. Interpret a senior developer that have the full panorama view about the project, the file organization, the database and the framework in general (full stack dev). And check and review my code knowing that I'm a junior dev that need helps solving easy issues and please give me insights to get better and points that I can improve my coding."
+
+  # - trigger: "//"
+  # replace: "Please act as a senior Python developer to help me with this code. Interpret a senior developer that have the full panorama view about the project, the file organization, the database and the framework in general (full stack dev). And check and review my code knowing that I'm a junior dev that need helps solving easy issues and please give me insights to get better and points that I can improve my coding."
+
+  - trigger: "//"
+    replace: "Please act as a senior Ruby (and Ruby on Rails) developer to help me with this code. Interpret a senior developer that have the full panorama view about the project, the file organization, the database and the framework in general (full stack dev). And check and review my code knowing that I'm a junior dev that need helps solving easy issues and please give me insights to get better and points that I can improve my coding."
+
+  - trigger: "//model"
+    replace: "/model default\n"
+
+  - trigger: "//model"
+    replace: "/model sonnet\n"
+
+  - trigger: "//model"
+    replace: "/model opus\n"
+
+  - trigger: "//ex"
+    replace: "/exit\n"
+
+  - trigger: "e;"
+    replace: "exit\n"
+
+  # APPS - Terminal
+  - trigger: "sy;"
+    replace: "syncthing"
+
+  # Replacers
+  - trigger: "end;"
+    replace: "endereço "
+  - trigger: "con;"
+    replace: "conseguiu? "
+  - trigger: "q "
+    replace: "que "
+  - trigger: "n;"
+    replace: "não "
+  - trigger: "pa;"
+    replace: "para "
+  - trigger: "vc "
+    replace: "você "
+  - trigger: "ma;"
+    replace: "mais "
+  - trigger: "cm "
+    replace: "como "
+  - trigger: "tb;"
+    replace: "também "
+  - trigger: "ex;"
+    replace: "exemplo "
+  - trigger: "dp;"
+    replace: "depois "
+  - trigger: "qd;"
+    replace: "quando "
+  - trigger: "tds;"
+    replace: "todos "
+  - trigger: "pq;"
+    replace: "porque "
+  - trigger: "ad;"
+    replace: "adianta "
+  - trigger: "senha;"
+    replace: "me passa uma senha do Projudi por favor "
+  - trigger: "sx; "
+    replace: "sexo "
+  - trigger: "exp;"
+    replace: "excluir permanentemente"
+  - trigger: "desc;"
+    replace: "Descrição:"
+  - trigger: "ap;"
+    replace: "aposentadoria"
+  - trigger: "Ap;"
+    replace: "Aposentadoria"
+  - trigger: "ape;"
+    replace: "aposentadoria especial"
+  - trigger: "Ape;"
+    replace: "Aposentadoria Especial"
+  - trigger: "EC;"
+    replace: "Emenda Constitucional 103/2019 (EC 103/2019)"
+  - trigger: "reforma;"
+    replace: "Reforma da Previdência"
+  - trigger: "sp;"
+    replace: "Servidor Público"
+  - trigger: "Sp;"
+    replace: "Serviço Público"
