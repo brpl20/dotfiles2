@@ -1,0 +1,30 @@
+alias pwdc='pwd | pbcopy'
+alias o="open ."
+
+# alias s="grep 'YOUR_TERM' "
+alias ss="search_term_in_my_file"
+search_term_in_my_file() {
+    local file="$GD/wikit/daily/uteisNew.md"
+    if [[ "$1" == "#" ]]; then
+        # New approach: search for sections (case insensitive)
+        awk -v term="# $2" '
+        BEGIN { IGNORECASE = 1 }
+        $0 ~ "^" term {
+            found = 1
+            print
+            next
+        }
+        found && NF {
+            print
+            next
+        }
+        found && !NF {
+            found = 0
+        }
+        ' "$file" | tee >(pbcopy)
+    else
+        # Original approach: grep search (case insensitive)
+        grep -i "$1" "$file" | awk -F'=> ' '{print $2}' | awk '{print $1}' | pbcopy
+        grep -i "$1" "$file"
+    fi
+}
