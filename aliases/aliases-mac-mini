@@ -27,7 +27,49 @@ search_term_in_my_file() {
         ' "$file" | tee >(pbcopy)
     else
         # Original approach: grep search (case insensitive)
-        grep -i "$1" "$file" | awk -F'=> ' '{print $2}' | awk '{print $1}' | pbcopy
-        grep -i "$1" "$file"
+        local matches=$(grep -in "$1" "$file")
+        if [[ -z "$matches" ]]; then
+            return
+        fi
+
+        local output=""
+        local match_count=$(echo "$matches" | wc -l)
+
+        # Check if single line match (one-liner) - extract credentials
+        if [[ "$match_count" -eq 1 ]]; then
+            local line=$(echo "$matches" | cut -d: -f2-)
+            # Extract login (=>) and password (=*)
+            local login=$(echo "$line" | sed -n 's/.*=> \([^ ]*\).*/\1/p')
+            local pass=$(echo "$line" | sed -n 's/.*=\* \([^ ]*\).*/\1/p')
+            if [[ -n "$login" && -n "$pass" ]]; then
+                echo "$login $pass" | pbcopy
+                echo "$line"
+                echo "📋 Copied: login + password"
+                return
+            fi
+        fi
+
+        # Show full sections for header matches
+        local header_matches=$(echo "$matches" | grep -E '^[0-9]+:#{1,6} ')
+        if [[ -n "$header_matches" ]]; then
+            while read -r match; do
+                local linenum=$(echo "$match" | cut -d: -f1)
+                output+=$(awk -v start="$linenum" '
+                    NR == start { found = 1; print; next }
+                    found && /^#{1,6} / { exit }
+                    found { print }
+                ' "$file")
+                output+=$'\n'
+            done <<< "$header_matches"
+        fi
+
+        # Show non-header matches as regular lines
+        local non_header_matches=$(echo "$matches" | grep -vE '^[0-9]+:#{1,6} ')
+        if [[ -n "$non_header_matches" ]]; then
+            output+=$(echo "$non_header_matches" | cut -d: -f2-)
+            output+=$'\n'
+        fi
+
+        echo "$output" | tee >(pbcopy)
     fi
 }

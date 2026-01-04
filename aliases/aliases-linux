@@ -1,10 +1,72 @@
-# Grep Fast SS 
+# Grep Fast SS
 # alias s="grep 'YOUR_TERM' "
-alias ss="grep_search_term_in_my_file"
+alias ss="search_term_in_my_file"
+search_term_in_my_file() {
+    local file="$GD/wikit/daily/uteisNew.md"
+    if [[ "$1" == "#" ]]; then
+        # New approach: search for sections (case insensitive)
+        awk -v term="# $2" '
+        BEGIN { IGNORECASE = 1 }
+        $0 ~ "^" term {
+            found = 1
+            print
+            next
+        }
+        found && NF {
+            print
+            next
+        }
+        found && !NF {
+            found = 0
+        }
+        ' "$file" | tee >(xclip -selection clipboard)
+    else
+        # Original approach: grep search (case insensitive)
+        local matches=$(grep -in "$1" "$file")
+        if [[ -z "$matches" ]]; then
+            return
+        fi
 
-grep_search_term_in_my_file() {
-    grep "$1" $GD/wikit/daily/uteisNew.md | awk -F'=> ' '{print $2}' | awk '{print $1}' | xclip -selection clipboard
-    grep "$1" $GD/wikit/daily/uteisNew.md
+        local output=""
+        local match_count=$(echo "$matches" | wc -l)
+
+        # Check if single line match (one-liner) - extract credentials
+        if [[ "$match_count" -eq 1 ]]; then
+            local line=$(echo "$matches" | cut -d: -f2-)
+            # Extract login (=>) and password (=*)
+            local login=$(echo "$line" | grep -oP '(?<==>\s)[^\s]+' | head -1)
+            local pass=$(echo "$line" | grep -oP '(?<==\*\s)[^\s]+' | head -1)
+            if [[ -n "$login" && -n "$pass" ]]; then
+                echo "$login $pass" | xclip -selection clipboard
+                echo "$line"
+                echo "📋 Copied: login + password"
+                return
+            fi
+        fi
+
+        # Show full sections for header matches
+        local header_matches=$(echo "$matches" | grep -E '^[0-9]+:#{1,6} ')
+        if [[ -n "$header_matches" ]]; then
+            while read -r match; do
+                local linenum=$(echo "$match" | cut -d: -f1)
+                output+=$(awk -v start="$linenum" '
+                    NR == start { found = 1; print; next }
+                    found && /^#{1,6} / { exit }
+                    found { print }
+                ' "$file")
+                output+=$'\n'
+            done <<< "$header_matches"
+        fi
+
+        # Show non-header matches as regular lines
+        local non_header_matches=$(echo "$matches" | grep -vE '^[0-9]+:#{1,6} ')
+        if [[ -n "$non_header_matches" ]]; then
+            output+=$(echo "$non_header_matches" | cut -d: -f2-)
+            output+=$'\n'
+        fi
+
+        echo "$output" | tee >(xclip -selection clipboard)
+    fi
 }
 
 alias pwdc='pwd | xclip -selection clipboard'
