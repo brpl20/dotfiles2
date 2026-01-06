@@ -1,5 +1,12 @@
+# Linux-specific ls aliases with colors
+alias ls='ls --color=auto'
+alias l='ls -lah --color=auto'
+alias la='ls -lAh --color=auto'
+alias ll='ls -lh --color=auto'
+alias lsa='ls -lah --color=auto'
+
+
 # Grep Fast SS
-# alias s="grep 'YOUR_TERM' "
 alias ss="search_term_in_my_file"
 search_term_in_my_file() {
     local file="$GD/wikit/daily/uteisNew.md"
@@ -7,21 +14,11 @@ search_term_in_my_file() {
         # Search for sections (case insensitive)
         awk -v term="# $2" '
         BEGIN { IGNORECASE = 1 }
-        $0 ~ "^" term {
-            found = 1
-            print
-            next
-        }
-        found && NF {
-            print
-            next
-        }
-        found && !NF {
-            found = 0
-        }
-        ' "$file" | tee >(xclip -selection clipboard)
+        $0 ~ "^" term { found = 1; print; next }
+        found && NF { print; next }
+        found && !NF { found = 0 }
+        ' "$file"
     else
-        # Simple grep search
         grep "$1" "$file"
     fi
 }
