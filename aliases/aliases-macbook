@@ -1,6 +1,9 @@
 alias pwdc='pwd | pbcopy'
 alias o="open ."
 
+# Espanso
+alias edespanso="$EDITOR $CODEF/dotfiles2/espanso/base.yml && espanso restart"
+
 # alias s="grep 'YOUR_TERM' "
 alias ss="search_term_in_my_file"
 search_term_in_my_file() {

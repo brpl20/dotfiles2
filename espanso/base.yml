@@ -21,6 +21,9 @@ matches:
   - trigger: "058"
     replace: "05880253996"
 
+  - trigger: "05."
+    replace: "058.802.539-96"
+
   # Atendimentos
   - trigger: "cal;"
     replace: "Atendimento: {{link}}"
@@ -106,6 +109,7 @@ matches:
   - trigger: "pub;"
     replace: "published: true"
 
+  # Rails Console
   - trigger: "x;"
     replace: "x = Office.last\n"
 
@@ -119,50 +123,35 @@ matches:
     replace: "q = DocxServices::FormatterQualification.new(u)\n"
 
   # Claude Code
-  - trigger: "//"
+  - trigger: "/*"
     replace: "gaa gcam gp { follow Conventional Commits rules }"
 
-  - trigger: "//"
+  - trigger: "/*"
     replace: "code review: please act as a senior developer reviewing a junior code. Check for code quality, dry princples and clean code. Follow Rails 8 best rules and conventions for backend and Svelte 5 rules and conventions if you are reviewing the frontend"
 
-  - trigger: "//"
+  - trigger: "/*"
     replace: "give me the endpoints and a JSON request for each one of them - only one request is enough - the most complete possible"
 
-  - trigger: "//"
+  - trigger: "/*"
     replace: "please create an detailed report of what is being done until now and the next steps for the next agent"
 
-  - trigger: "//"
+  - trigger: "/*"
     replace: "As QA and code specialist check the last commit and inspect code quality and check if there is any improvements to be done to the code be more consise, follow dry rules and software development best practices;"
 
-  - trigger: "//"
+  - trigger: "/*"
     replace: "Study Svelte 5 runes at ./ai-docs/svelte-medium.txt if you can't get information there please go to: svelte-full.txt. We need to ($|$)"
 
-  - trigger: "//"
+  - trigger: "/*"
     replace: "At /Users/brpl/code/ProcStudio/docs create a documentation about ($|$) . Update the README.md to insert it into the README.me ## Índice for future reference - please write it in Brazilian Portuguese please"
 
-  # - trigger: "//"
-  # replace: "Please act as a senior TypeScript developer to help me with this code. Interpret a senior developer that have the full panorama view about the project, the file organization, the database and the framework in general (full stack dev). And check and review my code knowing that I'm a junior dev that need helps solving easy issues and please give me insights to get better and points that I can improve my coding."
-
-  # - trigger: "//"
-  # replace: "Please act as a senior Python developer to help me with this code. Interpret a senior developer that have the full panorama view about the project, the file organization, the database and the framework in general (full stack dev). And check and review my code knowing that I'm a junior dev that need helps solving easy issues and please give me insights to get better and points that I can improve my coding."
-
-  - trigger: "//"
-    replace: "Please act as a senior Ruby (and Ruby on Rails) developer to help me with this code. Interpret a senior developer that have the full panorama view about the project, the file organization, the database and the framework in general (full stack dev). And check and review my code knowing that I'm a junior dev that need helps solving easy issues and please give me insights to get better and points that I can improve my coding."
-
-  - trigger: "//model"
-    replace: "/model default\n"
-
-  - trigger: "//model"
-    replace: "/model sonnet\n"
-
-  - trigger: "//model"
-    replace: "/model opus\n"
-
-  - trigger: "//ex"
+  - trigger: "/ex"
     replace: "/exit\n"
 
-  - trigger: "e;"
+  - trigger: "/e"
     replace: "exit\n"
+
+  - trigger: "/q"
+    replace: "quit\n"
 
   # APPS - Terminal
   - trigger: "sy;"

@@ -18,6 +18,7 @@ alias gpu='git push upstream'
 alias h1="ssh brpl@168.231.90.14"
 alias h2="ssh brpl@168.231.91.47"
 alias h3="ssh root@212.85.13.30"
+alias nas="ssh brpl@AS5404T-FE29.local"
 
 # Coding
 ## Rails
@@ -98,8 +99,8 @@ alias cd..="cd .."
 # Rest of the aliases and Espanso
 alias cataliases="cat $HOME/.aliases-base"
 alias edaliases="cd $CODEF/dotfiles2 && vim $CODEF/dotfiles2/aliases-base"
-alias catespanso="cat $ESPANSO/base.yml"
-alias edespanso="$EDITOR2 $ESPANSO/base.yml"
+alias catespanso="cat $CODEF/dotfiles2/espanso/base.yml"
+alias edespanso="$EDITOR $CODEF/dotfiles2/espanso/base.yml"
 alias eduteis="$EDITORS $GD/wikit/daily/uteisNew.md"
 
 # Locations

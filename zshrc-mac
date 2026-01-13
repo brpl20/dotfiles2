@@ -13,15 +13,16 @@ export PATH="./bin:./node_modules/.bin:${PATH}:/usr/local/sbin"
 eval "$(atuin init zsh)"
 
 # Aliases for macOS-specific aliases
-# MacBook 
+# MacBook
 if [ "$os_type" = "Darwin" ]; then
   [[ -f "$HOME/.aliases-mac" ]] && source "$HOME/.aliases-mac" || echo "Error: $HOME/.aliases-mac not found."
 fi
 
 # Aliases macOS-specific aliases
 if [ "$os_type" = "Darwin" ]; then
+  export EDITOR="zed"
+  export EDITOR2="vim"
   export GD="/Users/brpl20/Library/CloudStorage/GoogleDrive-pelli.br@gmail.com/Meu Drive"
-  export ESPANSO="/Users/brpl20/Library/Application\ Support/espanso/match"
   export OD="/Users/brpl20/Library/CloudStorage/OneDrive-Pessoal"
   export CODEF="/Users/brpl20/code"
   export DESK="/Users/brpl20/Desktop"
