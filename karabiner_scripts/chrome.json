@@ -1,0 +1,19 @@
+{
+    "description": "g & 1 (simultaneously for 0.15 sec) => Open Google Chrome Profile 1",
+    "manipulators": [
+        {
+            "from": {
+                "simultaneous": [
+                    { "key_code": "g" },
+                    { "key_code": "1" }
+                ]
+            },
+            "parameters": {
+                "basic.simultaneous_threshold_milliseconds": 150,
+                "basic.to_if_held_down_threshold_milliseconds": 150
+            },
+            "to_if_held_down": [{ "shell_command": "sh /Users/brpl20/code/dotfiles2/scripts/open_chrome_profile_1.sh" }],
+            "type": "basic"
+        }
+    ]
+}

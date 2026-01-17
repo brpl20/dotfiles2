@@ -1,0 +1,63 @@
+{
+    "description": "Toggle Program Source and refocus Timeline",
+    "manipulators": [
+        {
+            "conditions": [
+                {
+                    "bundle_identifiers": [
+                        "^com\\.adobe\\.premiere"
+                    ],
+                    "type": "frontmost_application_if"
+                },
+                {
+                    "name": "program_source_open",
+                    "type": "variable_if",
+                    "value": 0
+                }
+            ],
+            "from": { "key_code": "slash" },
+            "to": [{ "key_code": "slash" }],
+            "to_after_key_up": [
+                {
+                    "set_variable": {
+                        "name": "program_source_open",
+                        "value": 1
+                    }
+                }
+            ],
+            "type": "basic"
+        },
+        {
+            "conditions": [
+                {
+                    "bundle_identifiers": [
+                        "^com\\.adobe\\.premiere"
+                    ],
+                    "type": "frontmost_application_if"
+                },
+                {
+                    "name": "program_source_open",
+                    "type": "variable_if",
+                    "value": 1
+                }
+            ],
+            "from": { "key_code": "slash" },
+            "to": [
+                { "key_code": "slash" },
+                {
+                    "key_code": "3",
+                    "modifiers": ["shift"]
+                }
+            ],
+            "to_after_key_up": [
+                {
+                    "set_variable": {
+                        "name": "program_source_open",
+                        "value": 0
+                    }
+                }
+            ],
+            "type": "basic"
+        }
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    "rules": [
+        {
+            "description": "Remap Alt + Right Arrow to Command + ]",
+            "manipulators": [
+                {
+                    "from": {
+                        "key_code": "right_arrow",
+                        "modifiers": { "mandatory": ["option"] }
+                    },
+                    "to": [
+                        {
+                            "key_code": "close_bracket",
+                            "modifiers": ["command"]
+                        }
+                    ],
+                    "type": "basic"
+                }
+            ]
+        },
+        {
+            "description": "Remap Alt + Left Arrow to Command + [",
+            "manipulators": [
+                {
+                    "from": {
+                        "key_code": "left_arrow",
+                        "modifiers": { "mandatory": ["option"] }
+                    },
+                    "to": [
+                        {
+                            "key_code": "open_bracket",
+                            "modifiers": ["command"]
+                        }
+                    ],
+                    "type": "basic"
+                }
+            ]
+        }
+    ]
+}

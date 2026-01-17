@@ -1,46 +1,47 @@
-tle": "Simultaneous Key App Launchers",
-  "rules": [
-    {
-      "description": "t & m (simultaneously for 0.15 sec) => Open Terminal",
-      "manipulators": [
+{
+    "title": "Simultaneous Key App Launchers",
+    "rules": [
         {
-          "type": "basic",
-          "from": {
-            "simultaneous": [
-              { "key_code": "t" },
-              { "key_code": "m" }
+            "description": "t & m (simultaneously for 0.15 sec) => Open Terminal",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "simultaneous": [
+                            { "key_code": "t" },
+                            { "key_code": "m" }
+                        ]
+                    },
+                    "parameters": {
+                        "basic.simultaneous_threshold_milliseconds": 150,
+                        "basic.to_if_held_down_threshold_milliseconds": 150
+                    },
+                    "to_if_held_down": [
+                        { "shell_command": "open -a Terminal" }
+                    ]
+                }
             ]
-          },
-          "parameters": {
-            "basic.simultaneous_threshold_milliseconds": 150,
-            "basic.to_if_held_down_threshold_milliseconds": 150
-          },
-          "to_if_held_down": [
-            { "shell_command": "open -a Terminal" }
-          ]
-        }
-      ]
-    },
-    {
-      "description": "l & n (simultaneously for 0.15 sec) => Open Linear",
-      "manipulators": [
+        },
         {
-          "type": "basic",
-          "from": {
-            "simultaneous": [
-              { "key_code": "l" },
-              { "key_code": "n" }
+            "description": "l & n (simultaneously for 0.15 sec) => Open Linear",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "simultaneous": [
+                            { "key_code": "l" },
+                            { "key_code": "n" }
+                        ]
+                    },
+                    "parameters": {
+                        "basic.simultaneous_threshold_milliseconds": 150,
+                        "basic.to_if_held_down_threshold_milliseconds": 150
+                    },
+                    "to_if_held_down": [
+                        { "shell_command": "open -a Linear" }
+                    ]
+                }
             ]
-          },
-          "parameters": {
-            "basic.simultaneous_threshold_milliseconds": 150,
-            "basic.to_if_held_down_threshold_milliseconds": 150
-          },
-          "to_if_held_down": [
-            { "shell_command": "open -a Linear" }
-          ]
         }
-      ]
-    }
-  ]
+    ]
 }

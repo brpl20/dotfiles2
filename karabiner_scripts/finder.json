@@ -1,0 +1,64 @@
+{
+    "rules": [
+        {
+            "description": "Use Esc to finish renaming when onedit=1",
+            "manipulators": [
+                {
+                    "conditions": [
+                        {
+                            "bundle_identifiers": [
+                                "^com.apple.finder"
+                            ],
+                            "type": "frontmost_application_if"
+                        },
+                        {
+                            "name": "onedit",
+                            "type": "variable_if",
+                            "value": 1
+                        }
+                    ],
+                    "from": {
+                        "key_code": "escape",
+                        "modifiers": { "optional": ["any"] }
+                    },
+                    "to": [
+                        { "key_code": "escape" },
+                        {
+                            "set_variable": {
+                                "name": "onedit",
+                                "value": 0
+                            }
+                        }
+                    ],
+                    "type": "basic"
+                }
+            ]
+        },
+        {
+            "description": "Use F2 as Rename and set onedit",
+            "manipulators": [
+                {
+                    "conditions": [
+                        {
+                            "bundle_identifiers": [
+                                "^com.apple.finder"
+                            ],
+                            "type": "frontmost_application_if"
+                        }
+                    ],
+                    "from": { "key_code": "f2" },
+                    "to": [
+                        { "key_code": "return_or_enter" },
+                        {
+                            "set_variable": {
+                                "name": "onedit",
+                                "value": 1
+                            }
+                        }
+                    ],
+                    "type": "basic"
+                }
+            ]
+        }
+    ]
+}
