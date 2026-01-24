@@ -119,6 +119,7 @@ alias prcf="cd $CODEF/ProcStudio/frontend"
 alias prct="cd $CODEF/ProcStudio/tests"
 alias prcblog="cd $CODEF/procstudio_blog"
 alias prcd="cd $CODEF/ProcStudio/docs"
+alias prc-tree="$CODEF/dotfiles2/shell/prc-tree.sh"
 
 # ProcStudio APIS/Scrapers
 alias prcld="cd $CODEF/legal_data_api"
