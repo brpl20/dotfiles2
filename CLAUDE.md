@@ -6,34 +6,45 @@ Personal dotfiles repository for multi-machine setup (macOS and Linux).
 
 ```
 dotfiles2/
-├── aliases/           # Shell aliases (machine-specific)
-│   ├── aliases-base   # Shared aliases (all machines)
-│   ├── aliases-macbook
-│   ├── aliases-mac-mini
-│   ├── aliases-linux
-│   └── aliases-git
-├── espanso/           # Espanso text expander config
-│   └── base.yml       # Source of truth for espanso matches
-├── shell_scripts/     # Utility scripts
-├── zshrc-mac          # Mac zsh config
-├── zshrc-minimal      # Minimal zsh config
-└── env                # Environment variables reference (draft)
+├── zshrc                     # Single entry point (symlinked to ~/.zshrc)
+├── os/
+│   ├── darwin                # macOS: pbcopy, open, edespanso, homebrew, paths
+│   └── linux                 # Linux: xclip, xdg-open, ls --color
+├── machines/
+│   ├── macbook               # Exports: EDITOR, GD, NC, OD, CODEF, DESK, DOWN, UTEIS
+│   ├── mac-mini              # Same + BIGDOWN, ssd alias
+│   ├── debian                # Linux paths + code editor
+│   ├── arch                  # Linux paths + nvim editor
+│   └── server                # Minimal (vim only)
+├── aliases/
+│   ├── aliases-base          # Shared aliases (ss uses $UTEIS, $CLIP)
+│   └── aliases-git           # Git aliases (sourced by zshrc)
+├── espanso/
+│   └── base.yml              # Espanso text expander config
+├── shell/                    # Utility scripts
+├── gitup.sh                  # General-purpose quick git push script
 ```
 
 ## Configuration Flow
 
-### macOS
-1. `~/.zshrc` sources `zshrc-mac`
-2. `zshrc-mac` sets environment variables (EDITOR, CODEF, GD, etc.)
-3. Sources `~/.aliases-mac` (symlinked to `aliases/aliases-macbook` or `aliases-mac-mini`)
-4. Sources `~/.aliases-base` (symlinked to `aliases/aliases-base`)
+### Sourcing chain in `zshrc`:
+```
+1. oh-my-zsh, nvm, rbenv, pyenv, atuin, fzf, starship
+2. machines/<name>       (from ~/.machine — sets EDITOR, CODEF, GD, UTEIS, etc.)
+3. os/darwin OR os/linux (via uname — sets CLIP, pwdc, edespanso, paths)
+4. aliases/aliases-base  (shared aliases)
+5. aliases/aliases-git   (git aliases)
+```
 
-### Environment Variables (Mac)
-- `EDITOR=zed` - Primary editor
-- `EDITOR2=vim` - Secondary/fallback editor
+### Environment Variables (set by machines/ files)
+- `EDITOR` - Primary editor (zed on mac, nvim on arch, etc.)
+- `EDITOR2` - Secondary/fallback editor
 - `CODEF` - Code folder path
 - `GD` - Google Drive path
 - `OD` - OneDrive path
+- `NC` - Nextcloud path
+- `UTEIS` - Path to uteis notes file (used by `ss` function)
+- `CLIP` - Clipboard command (set by os/ files: pbcopy or xclip)
 
 ## Espanso Setup
 
@@ -45,18 +56,23 @@ The espanso config lives in this repo and is symlinked to the system location:
 
 ### Editing Espanso
 ```bash
-edespanso  # Opens base.yml in $EDITOR and restarts espanso
+edespanso  # Opens base.yml in $EDITOR and restarts espanso (macOS only)
 ```
 
-## Symlinks Required
-
-Create these symlinks for a new machine:
+## Setup Per Machine (one-time)
 
 ```bash
-# Aliases
-ln -sf $CODEF/dotfiles2/aliases/aliases-base ~/.aliases-base
-ln -sf $CODEF/dotfiles2/aliases/aliases-macbook ~/.aliases-mac  # or aliases-mac-mini
+echo "macbook" > ~/.machine                # set machine identity
+ln -sf ~/code/dotfiles2/zshrc ~/.zshrc     # single symlink needed
 
-# Espanso
+# Espanso (macOS only)
 ln -sf $CODEF/dotfiles2/espanso/base.yml ~/Library/Application\ Support/espanso/match/base.yml
+```
+
+## gitup.sh (gup)
+
+General-purpose quick git push for simple repos (blogs, notes, etc.):
+```bash
+gup              # pull + add + commit "auto-update" + push
+gup "my message" # pull + add + commit "my message" + push
 ```

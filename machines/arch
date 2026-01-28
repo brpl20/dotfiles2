@@ -1,0 +1,12 @@
+# Arch Linux configuration
+
+export EDITOR="nvim"
+export EDITOR2="obsidian"
+
+export GD="/home/brpl/gd"
+export OD="/home/brpl/od"
+export CODEF="/home/brpl/code"
+export DESK="/home/brpl/Desktop"
+export DOWN="/home/brpl/Downloads"
+export BIGDOWN="/home/brpl/DOWNLOADS"
+export UTEIS="$GD/wikit/daily/uteisNew.md"

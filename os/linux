@@ -1,0 +1,19 @@
+# Linux-specific settings
+
+# Clipboard
+alias pwdc='pwd | xclip -selection clipboard'
+CLIP="xclip -selection clipboard"
+
+# File manager
+alias o="xdg-open ."
+
+# ls with colors
+alias ls='ls --color=auto'
+alias l='ls -lah --color=auto'
+alias la='ls -lAh --color=auto'
+alias ll='ls -lh --color=auto'
+alias lsa='ls -lah --color=auto'
+
+# Syntax highlighting
+[[ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && \
+  source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

@@ -1,6 +1,6 @@
 #!/bin/bash
-# gup - Quick git push for simple repos (blogs, notes, etc.)
-# Usage: gup [commit message]
+# gulp - Quick git pull + add + commit + push
+# Usage: gulp [commit message]
 # Default message: "auto-update"
 
 set -e
@@ -22,6 +22,7 @@ fi
 
 msg="${*:-auto-update}"
 
+git pull origin "$default_branch" --rebase
 git add .
 
 if git diff --cached --quiet; then

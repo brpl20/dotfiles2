@@ -1,0 +1,12 @@
+# MacBook configuration
+
+export EDITOR="zed"
+export EDITOR2="vim"
+
+export GD="/Users/brpl20/Library/CloudStorage/GoogleDrive-pelli.br@gmail.com/Meu Drive"
+export NC="/Users/brpl20/nc"
+export OD="/Users/brpl20/Library/CloudStorage/OneDrive-Pessoal"
+export CODEF="/Users/brpl20/code"
+export DESK="/Users/brpl20/Desktop"
+export DOWN="/Users/brpl20/Downloads"
+export UTEIS="$NC/wikit/daily/uteisNew.md"

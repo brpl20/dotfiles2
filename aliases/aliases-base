@@ -1,18 +1,9 @@
-# dotfiles2 aliaes
-# Configs
-alias myip="curl https://ipinfo.io/json" # or /ip for plain-text ip
-alias zshconfig="code ~/.zshrc"
+# dotfiles2 aliases-base
+# Shared across all machines. OS-specific stuff is in os/darwin and os/linux.
 
-# Git
-alias gst='git status'
-alias gaa='git add --all'
-alias gcam='git commit -a -m'
-alias ghc="gh repo create"
-alias gl='git pull'
-alias ggpull='git pull origin "$(git_current_branch)"'
-alias ggp='git push origin $(current_branch)'
-alias gp='git push'
-alias gpu='git push upstream'
+# Configs
+alias myip="curl https://ipinfo.io/json"
+alias zshconfig="$EDITOR ~/.zshrc"
 
 # Servers
 alias h1="ssh brpl@168.231.90.14"
@@ -53,7 +44,6 @@ alias c.="code ."
 alias z.="zed ."
 alias n.="nvim ."
 alias v.="vim ."
-alias o.="open ."
 alias cl="claude"
 alias cld="claude --dangerously-skip-permissions"
 alias cx="codex"
@@ -68,14 +58,14 @@ alias ll='ls -lh'
 alias ls='ls -G'
 alias lsa='ls -lah'
 
-alias bigtree='/Users/brpl/code/dotfiles2/shell_scripts/big_tree.sh'
+alias bigtree='$CODEF/dotfiles2/shell/big_tree.sh'
 
-# Define case-insensitive search
+# Case-insensitive search in ls
 lg() {
     ll -a | grep -i "$@"
 }
 
-# Define case-sensitive search
+# Case-sensitive search in ls
 lG() {
     ll -a | grep "$@"
 }
@@ -89,6 +79,7 @@ fopen() {
   fi
 }
 
+# Navigation
 alias ~="cd ~"
 alias .="cd .."
 alias ..="cd ../.."
@@ -96,68 +87,129 @@ alias ...="cd ../../.."
 alias ....="cd ../../../.."
 alias cd..="cd .."
 
-# Rest of the aliases and Espanso
-alias cataliases="cat $HOME/.aliases-base"
-alias edaliases="cd $CODEF/dotfiles2 && vim $CODEF/dotfiles2/aliases-base"
+# Dotfiles / aliases editing
+alias cataliases="cat $CODEF/dotfiles2/aliases/aliases-base"
+alias edaliases="$EDITOR $CODEF/dotfiles2/aliases/aliases-base"
 alias catespanso="cat $CODEF/dotfiles2/espanso/base.yml"
-alias edespanso="$EDITOR $CODEF/dotfiles2/espanso/base.yml"
-alias eduteis="$EDITORS $GD/wikit/daily/uteisNew.md"
+alias eduteis="$EDITOR2 $UTEIS"
 
 # Locations
-alias gd="cd $GD"
-alias od="cd $OD"
-alias wi="cd $GD/wikit"
-alias daily="code $GD/wikit"
-alias uteis="vim $GD/wikit/daily/uteisNew.md"
-alias cf="cd $CODEF"
-alias n8n="cd $GD/n8n"
+alias gd="cd \$GD"
+alias od="cd \$OD"
+alias wi="cd \$GD/wikit"
+alias daily="code \$GD/wikit"
+alias uteis="vim \$GD/wikit/daily/uteisNew.md"
+alias cf="cd \$CODEF"
+alias n8n="cd \$GD/n8n"
 
 # ProcStudio
-alias prc="cd $CODEF/ProcStudio"
-alias prcb="cd $CODEF/ProcStudio/api"
-alias prcf="cd $CODEF/ProcStudio/frontend"
-alias prct="cd $CODEF/ProcStudio/tests"
-alias prcblog="cd $CODEF/procstudio_blog"
-alias prcd="cd $CODEF/ProcStudio/docs"
-alias prc-tree="$CODEF/dotfiles2/shell/prc-tree.sh"
+alias prc="cd \$CODEF/ProcStudio"
+alias prcb="cd \$CODEF/ProcStudio/api"
+alias prcf="cd \$CODEF/ProcStudio/frontend"
+alias prct="cd \$CODEF/ProcStudio/tests"
+alias prcblog="cd \$CODEF/procstudio_blog"
+alias prcd="cd \$CODEF/ProcStudio/docs"
+alias prc-tree="\$CODEF/dotfiles2/shell/prc-tree.sh"
 
-# ProcStudio APIS/Scrapers
-alias prcld="cd $CODEF/legal_data_api"
-alias prcoab="cd $CODEF/oab_sa"
-alias prcocr="cd $CODEF/procstudio_ocr"
+# ProcStudio APIs/Scrapers
+alias prcld="cd \$CODEF/legal_data_api"
+alias prcoab="cd \$CODEF/oab_sa"
+alias prcocr="cd \$CODEF/procstudio_ocr"
 
-# BrplBLog
-alias blog="code $CODEF/brpl-blog/_posts"
-alias blogf="cd $CODEF/brpl-blog"
-alias blogup="sh $CODEF/brpl-blog/gitup.sh"
+# Blog
+alias blog="code \$CODEF/brpl-blog/_posts"
+alias blogf="cd \$CODEF/brpl-blog"
+alias blogup="sh \$CODEF/dotfiles2/gitup.sh"
 
-# Advocacia => Passar para os pias
-alias blogadv="cd $CODEF/sftown-pellizzetti-associados-fe"
-alias blogart='function _artigo(){ touch "${1}.mdx" && cat $CODEF/dotfiles2/headermdx.txt > "${1}.mdx"; echo "The file ${1}.mdx has been created and populated with content from headermdx.txt."; }; _artigo'
+# Advocacia
+alias blogadv="cd \$CODEF/sftown-pellizzetti-associados-fe"
+alias blogart='function _artigo(){ touch "${1}.mdx" && cat $CODEF/dotfiles2/headermdx.txt > "${1}.mdx"; echo "The file ${1}.mdx has been created."; }; _artigo'
 
-alias dot="cd $CODEF/dotfiles2"
+alias dot="cd \$CODEF/dotfiles2"
 
 # Uteis
-alias wab="cd $CODEF/whatsbot"
-alias wao="cd $CODEF/whats-organizer"
-alias wap="cd $CODEF/wap-uteis"
-alias crw="cd $CODEF/crawling"
+alias wab="cd \$CODEF/whatsbot"
+alias wao="cd \$CODEF/whats-organizer"
+alias wap="cd \$CODEF/wap-uteis"
+alias crw="cd \$CODEF/crawling"
 
-alias desk="cd $DESK"
-alias down="cd $DOWN"
-alias DOWN="cd $BIGDOWN"
+alias desk="cd \$DESK"
+alias down="cd \$DOWN"
+alias DOWN="cd \$BIGDOWN"
 
 # Comandos Recorrentes Globais
 alias sst="syncthing"
-alias pass='$CODEF/dotfiles2/shell_scripts/password_generator.sh'
+alias pass='\$CODEF/dotfiles2/shell/password_generator.sh'
 alias cpf="node ~/code/ProcStudio/ai-tools/cpf_generator.js"
 alias cnpj="node ~/code/ProcStudio/ai-tools/cnpj_generator.js"
 alias cep="node ~/code/ProcStudio/ai-tools/cep_generator.js"
 alias oab="node ~/code/ProcStudio/ai-tools/oab_generator.js"
 s3last() {
-    local count=${1:-2}  # Default to 2 if no parameter given
+    local count=${1:-2}
     aws s3 ls s3://prcstudio3herokubucket/ --recursive | sort | tail -n $count
 }
 
+# Quick git push for simple repos
+alias gup="sh \$CODEF/dotfiles2/gitup.sh"
+alias gulp="sh \$CODEF/dotfiles2/gitpullup.sh"
+
 # Apps e Scripts Shell
-alias swap="sh $GD/lztforeverfiles/aws_swap.sh"
+alias swap="sh \$GD/lztforeverfiles/aws_swap.sh"
+
+# Search uteis file
+alias ss="search_term_in_my_file"
+search_term_in_my_file() {
+    local file="$UTEIS"
+    if [[ -z "$file" ]]; then
+        echo "UTEIS not set"
+        return 1
+    fi
+    if [[ "$1" == "#" ]]; then
+        # Header search: ss # docker → finds ## Docker header and prints full section
+        awk -v term="$2" '
+        BEGIN { IGNORECASE = 1 }
+        /^#+/ && tolower($0) ~ tolower(term) {
+            if (found) print "---"
+            found = 1
+            match($0, /^#+/)
+            level = RLENGTH
+            print
+            next
+        }
+        found && /^#+/ {
+            match($0, /^#+/)
+            if (RLENGTH <= level) found = 0
+            else print
+            next
+        }
+        found { print }
+        ' "$file" | tee >($CLIP)
+    else
+        # General search: ss h3
+        # Regular lines print as-is; header matches expand to full section
+        awk -v term="$1" '
+        BEGIN { IGNORECASE = 1 }
+        in_section && /^#+/ {
+            match($0, /^#+/)
+            if (RLENGTH <= sec_level) {
+                in_section = 0
+            } else {
+                print
+                next
+            }
+        }
+        in_section { print; next }
+        tolower($0) ~ tolower(term) {
+            if (/^#+/) {
+                if (NR > 1) print "---"
+                print $0
+                match($0, /^#+/)
+                sec_level = RLENGTH
+                in_section = 1
+            } else {
+                print $0
+            }
+        }
+        ' "$file"
+    fi
+}

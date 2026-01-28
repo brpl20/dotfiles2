@@ -1,0 +1,6 @@
+# Server (minimal) configuration
+
+export EDITOR="vim"
+export EDITOR2="nano"
+
+export CODEF="/home/brpl/code"
