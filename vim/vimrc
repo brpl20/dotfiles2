@@ -1,0 +1,276 @@
+" ==============================================================================
+" DEVELOPER-FOCUSED VIM CONFIGURATION
+" ==============================================================================
+
+" Basic Settings
+" ------------------------------------------------------------------------------
+set nocompatible                " Disable vi compatibility
+set encoding=utf-8              " Set UTF-8 encoding
+set fileencoding=utf-8          " File encoding
+set backspace=indent,eol,start  " Make backspace work as expected
+set hidden                      " Allow unsaved buffers in background
+set autoread                    " Auto-reload files changed outside vim
+set confirm                     " Confirm before closing unsaved files
+
+" Display Settings
+" ------------------------------------------------------------------------------
+syntax enable                   " Enable syntax highlighting
+set number                      " Show line numbers
+set relativenumber              " Show relative line numbers
+set ruler                       " Show cursor position
+set showcmd                     " Show command in status line
+set showmode                    " Show current mode
+set showmatch                   " Highlight matching brackets
+set laststatus=2                " Always show status line
+set cursorline                  " Highlight current line
+set wrap                        " Wrap long lines
+set linebreak                   " Break lines at word boundaries
+set scrolloff=8                 " Keep 8 lines above/below cursor
+set sidescrolloff=8             " Keep 8 columns left/right of cursor
+set colorcolumn=80              " Show column at 80 characters
+
+" Search Settings
+" ------------------------------------------------------------------------------
+set hlsearch                    " Highlight search results
+set incsearch                   " Incremental search
+set ignorecase                  " Ignore case in search
+set smartcase                   " Override ignorecase if uppercase used
+set gdefault                    " Use global flag by default in s///
+
+" Indentation and Formatting
+" ------------------------------------------------------------------------------
+set autoindent                  " Auto-indent new lines
+set smartindent                 " Smart auto-indenting
+set expandtab                   " Use spaces instead of tabs
+set tabstop=4                   " Tab width
+set shiftwidth=4                " Indent width
+set softtabstop=4               " Tab width in insert mode
+set shiftround                  " Round indent to multiple of shiftwidth
+filetype plugin indent on      " Enable filetype-specific indenting
+
+" File and Buffer Management
+" ------------------------------------------------------------------------------
+set wildmenu                    " Enhanced command completion
+set wildmode=longest:full,full  " Command completion mode
+set wildignore=*.o,*.obj,*.exe,*.dll,*.so,*.dylib
+set wildignore+=*.pyc,*.pyo,__pycache__
+set wildignore+=*.class,*.jar
+set wildignore+=node_modules/**,*.min.js
+set wildignore+=.git/**,.hg/**,.svn/**
+set wildignore+=*.jpg,*.jpeg,*.png,*.gif,*.bmp
+set path+=**                    " Search down into subfolders
+
+" Backup and Swap Files
+" ------------------------------------------------------------------------------
+set backup                      " Enable backups
+set backupdir=~/.vim/backup//   " Backup directory
+set directory=~/.vim/swap//     " Swap file directory
+set undofile                    " Enable persistent undo
+set undodir=~/.vim/undo//       " Undo directory
+
+" Create directories if they don't exist
+if !isdirectory($HOME."/.vim/backup")
+    call mkdir($HOME."/.vim/backup", "p")
+endif
+if !isdirectory($HOME."/.vim/swap")
+    call mkdir($HOME."/.vim/swap", "p")
+endif
+if !isdirectory($HOME."/.vim/undo")
+    call mkdir($HOME."/.vim/undo", "p")
+endif
+
+" Performance Settings
+" ------------------------------------------------------------------------------
+set ttyfast                     " Fast terminal connection
+set lazyredraw                  " Don't redraw during macros
+set synmaxcol=200               " Limit syntax highlighting to 200 columns
+set updatetime=300              " Faster completion
+
+" Key Mappings
+" ------------------------------------------------------------------------------
+let mapleader = " "             " Set leader key to space
+
+" Better navigation
+nnoremap j gj
+nnoremap k gk
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" Quick save and quit
+nnoremap <leader>w :w<CR>
+nnoremap <leader>q :q<CR>
+nnoremap <leader>wq :wq<CR>
+
+" Clear search highlighting
+nnoremap <leader>/ :nohlsearch<CR>
+
+" Toggle line number modes
+nnoremap <leader>n :call ToggleLineNumbers()<CR>
+
+" Function to toggle line numbers
+function! ToggleLineNumbers()
+    if &relativenumber
+        set norelativenumber
+        set number
+        echo "Absolute line numbers"
+    else
+        set relativenumber
+        set number
+        echo "Relative line numbers"
+    endif
+endfunction
+
+" Buffer navigation
+nnoremap <Tab> :bnext<CR>
+nnoremap <S-Tab> :bprevious<CR>
+nnoremap <leader>bd :bdelete<CR>
+
+" Split management
+nnoremap <leader>v :vsplit<CR>
+nnoremap <leader>h :split<CR>
+
+" Quick edit vimrc
+nnoremap <leader>ev :e $MYVIMRC<CR>
+nnoremap <leader>sv :source $MYVIMRC<CR>
+
+" Better indenting in visual mode
+vnoremap < <gv
+vnoremap > >gv
+
+" Move lines up/down
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+inoremap <A-j> <Esc>:m .+1<CR>==gi
+inoremap <A-k> <Esc>:m .-2<CR>==gi
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
+
+" Copy to system clipboard
+vnoremap <leader>y "+y
+nnoremap <leader>Y "+yg_
+nnoremap <leader>yy "+yy
+
+" Paste from system clipboard
+nnoremap <leader>p "+p
+nnoremap <leader>P "+P
+vnoremap <leader>p "+p
+vnoremap <leader>P "+P
+
+" Language-Specific Settings
+" ------------------------------------------------------------------------------
+augroup FileTypeSettings
+    autocmd!
+    " JavaScript/TypeScript
+    autocmd FileType javascript,typescript setlocal shiftwidth=2 tabstop=2 softtabstop=2
+    autocmd FileType json setlocal shiftwidth=2 tabstop=2 softtabstop=2
+
+    " HTML/CSS
+    autocmd FileType html,css,scss,sass setlocal shiftwidth=2 tabstop=2 softtabstop=2
+
+    " Python
+    autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
+
+    " Go
+    autocmd FileType go setlocal noexpandtab shiftwidth=4 tabstop=4 softtabstop=4
+
+    " Markdown
+    autocmd FileType markdown setlocal wrap linebreak
+
+    " Remove trailing whitespace on save
+    autocmd BufWritePre * %s/\s\+$//e
+augroup END
+
+" Color Scheme
+" ------------------------------------------------------------------------------
+set background=dark
+try
+    colorscheme desert
+catch
+    colorscheme default
+endtry
+
+" Status Line
+" ------------------------------------------------------------------------------
+set statusline=%f                           " filename
+set statusline+=%m                          " modified flag
+set statusline+=%r                          " read only flag
+set statusline+=%h                          " help flag
+set statusline+=%w                          " preview flag
+set statusline+=%=                          " left/right separator
+set statusline+=%c,                         " cursor column
+set statusline+=%l/%L                       " cursor line/total lines
+set statusline+=\ %P                        " percent through file
+
+" Netrw Settings (Built-in File Explorer)
+" ------------------------------------------------------------------------------
+let g:netrw_banner = 0          " Disable banner
+let g:netrw_liststyle = 3       " Tree view
+let g:netrw_winsize = 25        " Window size
+let g:netrw_altv = 1            " Open splits to the right
+let g:netrw_preview = 1         " Open previews vertically
+
+" Toggle netrw
+nnoremap <leader>e :Explore<CR>
+
+" Miscellaneous
+" ------------------------------------------------------------------------------
+set mouse=a                     " Enable mouse support
+set clipboard=unnamed           " Use system clipboard
+set splitright                  " Split vertical windows right
+set splitbelow                  " Split horizontal windows below
+set t_Co=256                    " Enable 256 colors
+set noerrorbells               " Disable error bells
+set visualbell                 " Use visual bell instead of beeping
+set t_vb=                      " Disable visual bell
+
+" Auto-commands
+" ------------------------------------------------------------------------------
+augroup VimrcAutoCommands
+    autocmd!
+    " Return to last edit position when opening files
+    autocmd BufReadPost *
+        \ if line("'\"") > 0 && line("'\"") <= line("$") |
+        \   exe "normal! g`\"" |
+        \ endif
+
+    " Create parent directories when saving
+    autocmd BufWritePre * call mkdir(expand("<afile>:p:h"), "p")
+augroup END
+
+" Plugin Management (vim-plug)
+" ------------------------------------------------------------------------------
+call plug#begin('~/.vim/plugged')
+
+" File navigation
+Plug 'preservim/nerdtree'
+
+" Essential plugins
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+
+call plug#end()
+
+" NERDTree Settings
+" ------------------------------------------------------------------------------
+" Toggle NERDTree
+nnoremap <leader>t :NERDTreeToggle<CR>
+nnoremap <leader>f :NERDTreeFind<CR>
+
+" NERDTree configuration
+let NERDTreeShowHidden=1        " Show hidden files
+let NERDTreeMinimalUI=1         " Minimal UI
+let NERDTreeDirArrows=1         " Use arrows for directories
+let NERDTreeAutoDeleteBuffer=1  " Auto delete buffers
+let NERDTreeQuitOnOpen=0        " Don't close after opening file
+let NERDTreeShowLineNumbers=0   " No line numbers in NERDTree
+let NERDTreeWinSize=30          " Set width
+
+" Close vim if NERDTree is the only window remaining
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+
+" ==============================================================================
+" END OF CONFIGURATION
+" ==============================================================================

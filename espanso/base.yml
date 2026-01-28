@@ -2,6 +2,49 @@ key_delay: 200
 inject_delay: 200
 
 matches:
+  # Temp Matchers
+  - trigger: "m;"
+    replace: "pelli.br.sp+u1@gmail.com"
+
+  - trigger: "m;"
+    replace: "pelli.br.sp+u2@gmail.com"
+
+  - trigger: "m;"
+    replace: "pelli.br.sp+u3@gmail.com"
+
+  - trigger: "m;"
+    replace: "pelli.br.sp+u4@gmail.com"
+
+  - trigger: "m;"
+    replace: "pelli.br.sp+u5@gmail.com"
+
+  - trigger: "m;"
+    replace: "pelli.br.sp+u6@gmail.com"
+
+  - trigger: "m;"
+    replace: "pelli.br.sp+u7gmail.com"
+
+  - trigger: "m2;"
+    replace: "adv5898+u1@gmail.com"
+
+  - trigger: "m2;"
+    replace: "adv5898+u2@gmail.com"
+
+  - trigger: "m2;"
+    replace: "adv5898+u3@gmail.com"
+
+  - trigger: "m2;"
+    replace: "adv5898+u4@gmail.com"
+
+  - trigger: "m2;"
+    replace: "adv5898+u5@gmail.com"
+
+  - trigger: "m2;"
+    replace: "adv5898+u6@gmail.com"
+
+  - trigger: "m2;"
+    replace: "adv5898+u7gmail.com"
+
   # Personal Info
   - trigger: "eu;"
     replace: "Bruno Pellizzetti\n05880253996\n"
@@ -23,6 +66,9 @@ matches:
 
   - trigger: "05."
     replace: "058.802.539-96"
+
+  - trigger: "12;"
+    replace: "123456\n"
 
   # Atendimentos
   - trigger: "cal;"
