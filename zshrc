@@ -3,10 +3,12 @@
 
 # --- Oh My Zsh ---
 ZSH=$HOME/.oh-my-zsh
-ZSH_THEME="robbyrussell"
-plugins=(git gitfast last-working-dir common-aliases sublime history-substring-search pyenv ssh-agent)
-source "${ZSH}/oh-my-zsh.sh"
-unalias rm 2>/dev/null
+if [[ -d "$ZSH" ]]; then
+  ZSH_THEME="robbyrussell"
+  plugins=(git gitfast last-working-dir common-aliases sublime history-substring-search pyenv ssh-agent)
+  source "${ZSH}/oh-my-zsh.sh"
+  unalias rm 2>/dev/null
+fi
 
 # --- PATH ---
 export PATH="./bin:./node_modules/.bin:${HOME}/.rbenv/bin:${HOME}/.pyenv/bin:${HOME}/.local/bin:${PATH}:/usr/local/sbin"

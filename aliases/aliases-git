@@ -236,7 +236,7 @@ alias gtv='git tag | sort -V'
 alias gtl='gtl(){ git tag --sort=-v:refname -n -l ${1}* }; noglob gtl'
 
 # Update
-alias gup='git pull --rebase'
+alias gupp='git pull --rebase'
 alias gupv='git pull --rebase -v'
 alias gupa='git pull --rebase --autostash'
 alias gupav='git pull --rebase --autostash -v'
