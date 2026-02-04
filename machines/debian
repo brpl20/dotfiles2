@@ -3,10 +3,15 @@
 export EDITOR="code"
 export EDITOR2="vim"
 
-export GD="/home/brpl/gd"
-export OD="/home/brpl/od"
+# NextCloud Bruno
+export NCB="/home/brpl/nc"
+export NCBD="/home/brpl/nc-dev"
+
+# OneDrive
+export OD="/home/brpl/odd"
+
 export CODEF="/home/brpl/code"
 export DESK="/home/brpl/Desktop"
 export DOWN="/home/brpl/Downloads"
 export BIGDOWN="/home/brpl/DOWNLOADS"
-export UTEIS="$GD/wikit/daily/uteisNew.md"
+export UTEIS="$NCB/wikit/daily/uteisNew.md"

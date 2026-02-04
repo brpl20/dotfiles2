@@ -96,6 +96,8 @@ alias eduteis="$EDITOR2 $UTEIS"
 # Locations
 alias gd="cd \$GD"
 alias od="cd \$OD"
+alias ncb="cd \$NCB"
+alias ncbd="cd \$NCBD"
 alias wi="cd \$GD/wikit"
 alias daily="code \$GD/wikit"
 alias uteis="vim \$GD/wikit/daily/uteisNew.md"
