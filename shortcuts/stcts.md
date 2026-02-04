@@ -21,11 +21,19 @@ A movimentacao UNIVERSAL entre abas deve ser:
 - No terminal nao se seguro usar Ctrl + ] [ -> Scape
 prev_tab = <Control><Shift>bracketleft
 next_tab = <Control><Shift>bracketright
-Tab Under Tab?
+Nested Tabs / Tab Under Tab?
 -> Chrome + Google Sheets (Não chega a ser uma tab, mas tem um movimento parecido entre as sheets)
 -> Terminal + nvim
 
----
+4. Terminal:
+Copiar - Ctrl + C
+Cancelar - Ctrl + Shift + C
+Colar  - Ctrl + V
+Repensar se compensa mudar o comportamento do CTRL + C
+
+5. SS
+Deixar um terminal dedicado para isso
+Arrumar Header reader ##
 
 [X] + n (1, 2, 3)
 Option + número do desktop
