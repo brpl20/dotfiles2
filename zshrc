@@ -92,3 +92,5 @@ esac
 [[ -f "$DOTFILES/aliases/aliases-git" ]]  && source "$DOTFILES/aliases/aliases-git"
 
 echo "Ola Bruno! Nao se esqueca de fazer esse o melhor dia de sua vida! Memento Mori"
+
+[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
