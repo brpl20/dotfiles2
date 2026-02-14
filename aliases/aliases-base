@@ -97,12 +97,18 @@ alias eduteis="$EDITOR2 $UTEIS"
 alias gd="cd \$GD"
 alias od="cd \$OD"
 alias ncb="cd \$NCB"
-alias ncbd="cd \$NCBD"
-alias wi="cd \$GD/wikit"
-alias daily="code \$GD/wikit"
-alias uteis="vim \$GD/wikit/daily/uteisNew.md"
+ncbd() {
+    if [[ -z "$NCBD" ]]; then
+        echo "Nextcloud Bruno Dev not set up on this machine (macbook)"
+    else
+        cd "$NCBD"
+    fi
+}
+alias wi="cd \$NC/wikit"
+alias daily="code \$NC/wikit"
+alias uteis="vim \$UTEIS"
 alias cf="cd \$CODEF"
-alias n8n="cd \$GD/n8n"
+alias n8n="cd \$NC/n8n"
 
 # ProcStudio
 alias prc="cd \$CODEF/ProcStudio"
@@ -156,7 +162,7 @@ alias gup="sh \$CODEF/dotfiles2/gitup.sh"
 alias gulp="sh \$CODEF/dotfiles2/gitpullup.sh"
 
 # Apps e Scripts Shell
-alias swap="sh \$GD/lztforeverfiles/aws_swap.sh"
+alias swap="sh \$NC/lztforeverfiles/aws_swap.sh"
 
 # Search uteis file
 alias ss="search_term_in_my_file"

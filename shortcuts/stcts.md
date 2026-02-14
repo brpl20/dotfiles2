@@ -1,5 +1,7 @@
-Linux / Win:
+Linux / MacMini / MacBook:
 [ctr] [super] [alt]
+[ctr] => [Command ⌘] || [spr/win]  => [ctr ^] || [alt]     => [Option ⌥]
+[ctr] => [Command ⌘] || [Option ⌥] => [ctr ^] || [Command] => [Option ⌥]
 
 # Navegação Entre Desktops / WorksPaces
 1. Desktop Switchs

@@ -54,6 +54,11 @@ The espanso config lives in this repo and is symlinked to the system location:
 ~/Library/Application Support/espanso/match/base.yml -> $CODEF/dotfiles2/espanso/base.yml
 ```
 
+```
+ln -sf $CODEF/dotfiles2/espanso/base.yml ~/Library/Application\ Support/espanso/match/base.yml
+edespanso
+```
+
 ### Editing Espanso
 ```bash
 edespanso  # Opens base.yml in $EDITOR and restarts espanso (macOS only)
