@@ -77,6 +77,8 @@ alias gdnolock='git diff $@ ":(exclude)package-lock.json" ":(exclude)*.lock"'
 alias gdup='git diff @{upstream}'
 alias gdv='git diff -w $@ | view -'
 alias gdw='git diff --word-diff'
+alias last='git diff --name-only HEAD~1'
+alias laste='git diff --name-only HEAD~1 | xargs $EDITOR'
 
 # Fetch
 alias gf='git fetch'
