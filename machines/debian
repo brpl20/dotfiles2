@@ -5,6 +5,7 @@ export EDITOR2="vim"
 
 # NextCloud Bruno
 export NCB="/home/brpl/nc"
+export GD="$NCB"
 export NCBD="/home/brpl/nc-dev"
 
 # OneDrive
