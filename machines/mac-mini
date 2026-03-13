@@ -12,6 +12,9 @@ export CODEF="/Users/brpl/code"
 export DESK="/Users/brpl/Desktop"
 export DOWN="/Users/brpl/Downloads"
 export BIGDOWN="/Volumes/BPSSD/DOWNLOADS"
-export UTEIS="$NC/wikit/daily/uteisNew.md"
+export UTEIS="$NCB/wikit/daily/uteisNew.md"
 
 alias ssd='cd /Volumes/BPSSD'
+
+# Tailscale SSH
+alias debian="ssh brpl@debian"
