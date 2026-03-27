@@ -6,6 +6,12 @@
 #   prc-tree -r | --remove <name> Remove a worktree
 #   prc-tree -p | --prune        Prune stale worktrees
 #
+# Port allocation (auto-incremented per worktree):
+#   Main:       Rails 3000 | Vite 5174
+#   Worktree 1: Rails 3001 | Vite 5175
+#   Worktree 2: Rails 3002 | Vite 5176
+#   ...
+#
 # Examples:
 #   prc-tree main
 #   prc-tree feature/new-feature
@@ -19,7 +25,15 @@ PROCSTUDIO_ROOT="${CODEF}/ProcStudio"
 
 # --- List worktrees ---
 if [[ "$1" == "-l" || "$1" == "--list" ]]; then
-    git -C "$PROCSTUDIO_ROOT" worktree list
+    echo "WORKTREE                                                      RAILS   VITE"
+    echo "--------------------------------------------------------------------------"
+    INDEX=0
+    while IFS= read -r line; do
+        RPORT=$((3000 + INDEX))
+        VPORT=$((5174 + INDEX))
+        printf "%-60s :%-6s :%-6s\n" "$line" "$RPORT" "$VPORT"
+        INDEX=$((INDEX + 1))
+    done < <(git -C "$PROCSTUDIO_ROOT" worktree list)
     exit 0
 fi
 
@@ -89,6 +103,7 @@ echo "Copying config files..."
 
 CONFIG_FILES=(
     "api/.env"
+    "api/.env.development"
     "api/config/database.yml"
     "api/config/master.key"
     "frontend/.env"
@@ -106,11 +121,93 @@ for cfg in "${CONFIG_FILES[@]}"; do
     fi
 done
 
+# --- Auto-assign ports ---
+# Count existing worktrees (excluding the main one) to determine offset
+WORKTREE_COUNT=$(git -C "$PROCSTUDIO_ROOT" worktree list | grep -cv "^${PROCSTUDIO_ROOT} ")
+RAILS_PORT=$((3000 + WORKTREE_COUNT))
+VITE_PORT=$((5174 + WORKTREE_COUNT))
+ELECTRIC_PORT=$((RAILS_PORT + 1000))
+
 echo ""
-echo "Worktree created successfully!"
-echo "Location: $WORKTREE_PATH"
+echo "Assigning ports: Rails=$RAILS_PORT | Vite=$VITE_PORT"
+
+# Update api/.env.development (PORT and FRONTEND_URL)
+ENV_DEV="$WORKTREE_PATH/api/.env.development"
+if [[ -f "$ENV_DEV" ]]; then
+    sed -i '' "s|^PORT=.*|PORT=${RAILS_PORT}|" "$ENV_DEV"
+    sed -i '' "s|^FRONTEND_URL=.*|FRONTEND_URL=http://localhost:${VITE_PORT}|" "$ENV_DEV"
+    echo "  api/.env.development → PORT=${RAILS_PORT}, FRONTEND_URL=:${VITE_PORT}"
+fi
+
+# Update frontend/.env (VITE_API_URL and VITE_ELECTRIC_URL)
+FRONT_ENV="$WORKTREE_PATH/frontend/.env"
+if [[ -f "$FRONT_ENV" ]]; then
+    sed -i '' "s|^VITE_API_URL=.*|VITE_API_URL=http://localhost:${RAILS_PORT}|" "$FRONT_ENV"
+    sed -i '' "s|^VITE_ELECTRIC_URL=.*|VITE_ELECTRIC_URL=http://localhost:${ELECTRIC_PORT}|" "$FRONT_ENV"
+    echo "  frontend/.env → VITE_API_URL=:${RAILS_PORT}, VITE_ELECTRIC_URL=:${ELECTRIC_PORT}"
+fi
+
+# Update frontend/vite.config.ts (server port + proxy targets)
+VITE_CONFIG="$WORKTREE_PATH/frontend/vite.config.ts"
+if [[ -f "$VITE_CONFIG" ]]; then
+    sed -i '' "s|port: [0-9]*,|port: ${VITE_PORT},|" "$VITE_CONFIG"
+    sed -i '' "s|target: 'ws://localhost:[0-9]*'|target: 'ws://localhost:${RAILS_PORT}'|" "$VITE_CONFIG"
+    sed -i '' "s|target: 'http://localhost:[0-9]*'|target: 'http://localhost:${RAILS_PORT}'|" "$VITE_CONFIG"
+    echo "  frontend/vite.config.ts → port=${VITE_PORT}, proxy→:${RAILS_PORT}"
+fi
+
+# Update tests/e2e/.env (LOCAL_PAGE and LOCAL_API)
+E2E_ENV="$WORKTREE_PATH/tests/e2e/.env"
+if [[ -f "$E2E_ENV" ]]; then
+    sed -i '' "s|^LOCAL_PAGE=.*|LOCAL_PAGE=http://localhost:${VITE_PORT}|" "$E2E_ENV"
+    sed -i '' "s|^LOCAL_API=.*|LOCAL_API=http://localhost:${RAILS_PORT}/api/v1|" "$E2E_ENV"
+    echo "  tests/e2e/.env → LOCAL_PAGE=:${VITE_PORT}, LOCAL_API=:${RAILS_PORT}"
+fi
+
+# Install backend dependencies
 echo ""
-echo "Next steps:"
+echo "Installing backend dependencies..."
+if [[ -f "$WORKTREE_PATH/api/Gemfile" ]]; then
+    (cd "$WORKTREE_PATH/api" && bundle install)
+    echo "  backend deps installed"
+else
+    echo "  skipped (no Gemfile found)"
+fi
+
+# Install frontend dependencies
+echo ""
+echo "Installing frontend dependencies..."
+if [[ -f "$WORKTREE_PATH/frontend/package.json" ]]; then
+    (cd "$WORKTREE_PATH/frontend" && npm install)
+    echo "  frontend deps installed"
+else
+    echo "  skipped (no package.json found)"
+fi
+
+# Install customer-frontend dependencies if present
+if [[ -f "$WORKTREE_PATH/customer-frontend/package.json" ]]; then
+    echo ""
+    echo "Installing customer-frontend dependencies..."
+    (cd "$WORKTREE_PATH/customer-frontend" && npm install)
+    echo "  customer-frontend deps installed"
+fi
+
+# Install e2e test dependencies if present
+if [[ -f "$WORKTREE_PATH/tests/e2e/package.json" ]]; then
+    echo ""
+    echo "Installing e2e test dependencies..."
+    (cd "$WORKTREE_PATH/tests/e2e" && npm install)
+    echo "  e2e deps installed"
+fi
+
+echo ""
+echo "========================================="
+echo "  Worktree ready!"
+echo "========================================="
+echo "  Location:  $WORKTREE_PATH"
+echo "  Rails API: http://localhost:${RAILS_PORT}"
+echo "  Frontend:  http://localhost:${VITE_PORT}"
+echo "========================================="
+echo ""
+echo "To start working:"
 echo "  cd $WORKTREE_PATH"
-echo "  cd api && bundle install"
-echo "  cd frontend && npm install"
