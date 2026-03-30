@@ -222,6 +222,30 @@ alias gstall='git stash --all'
 alias gsi='git submodule init'
 alias gsu='git submodule update'
 
+# Submodule publish: add, commit & push all dirty submodules, then update parent
+gsubpush() {
+  local msg="${1:-Update content}"
+  local dirty=0
+  echo "Checking submodules for changes..."
+  git submodule foreach --quiet 'echo $sm_path' | while read -r sm; do
+    if [ -n "$(git -C "$sm" status --porcelain)" ]; then
+      echo "→ $sm: committing & pushing..."
+      git -C "$sm" add -A
+      git -C "$sm" commit -m "$msg"
+      git -C "$sm" push
+      git add "$sm"
+      dirty=1
+    fi
+  done
+  if [ -n "$(git status --porcelain)" ]; then
+    echo "→ Updating parent repo submodule references..."
+    git commit -m "Update submodules: $msg"
+    echo "Done! Run 'git push' to push the parent repo."
+  else
+    echo "No submodule changes found."
+  fi
+}
+
 # SVN
 alias gsd='git svn dcommit'
 alias gsr='git svn rebase'

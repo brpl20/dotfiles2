@@ -102,3 +102,6 @@ echo "Ola Bruno! Nao se esqueca de fazer esse o melhor dia de sua vida! Memento 
 
 # Kiro CLI post block. Keep at the bottom of this file.
 [[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh"
+
+# opencode
+export PATH=/home/brpl/.opencode/bin:$PATH
