@@ -1,44 +1,85 @@
 #!/bin/bash
-# Script to run when BPSSD volume is mounted
+# Startup script: waits for BPSSD volume, starts Syncthing + Excalidraw
 # Location: /Users/brpl/code/dotfiles2/mac_scripts/brewhd_syncthing.sh
+# LaunchAgent: ~/Library/LaunchAgents/com.brpl.brewhd-startup.plist
 
-# Log file for debugging
 LOG_FILE="/Users/brpl/Library/Logs/brewhd_syncthing.log"
+BPSSD="/Volumes/BPSSD"
+BREW_BIN="$BPSSD/Aplicativos-HomeBrew/bin"
+SYNCTHING_BIN="$BPSSD/Aplicativos-HomeBrew/opt/syncthing/bin/syncthing"
+EXCALIDRAW_DIR="/Users/brpl/code/excalidraw"
+MAX_WAIT=300  # 5 minutes max
+INTERVAL=5
 
-# Log function
-log_message() {
-    echo "$(date): $1" >> "$LOG_FILE"
+log() {
+    echo "$(date '+%Y-%m-%d %H:%M:%S'): $1" >> "$LOG_FILE"
 }
 
-log_message "Script triggered - checking for BPSSD volume"
+notify() {
+    osascript -e "display notification \"$1\" with title \"$2\"" 2>/dev/null
+}
 
-# Check if the volume is actually mounted
-if [ -d "/Volumes/BPSSD" ]; then
-    log_message "BPSSD volume detected"
+# --- Wait for BPSSD ---
+log "=== Startup script triggered ==="
+waited=0
 
-    # Update PATH to include HomeBrew binaries from the external volume
-    export PATH="/Volumes/BPSSD/Aplicativos-HomeBrew/bin:$PATH"
-    log_message "PATH updated to include: /Volumes/BPSSD/Aplicativos-HomeBrew/bin"
-
-    # Check if Syncthing is already running
-    if pgrep -f "syncthing serve" > /dev/null; then
-        log_message "Syncthing is already running"
-        osascript -e 'display notification "Syncthing is already running" with title "BPSSD Volume Mounted"'
-    else
-        # Start Syncthing in background
-        log_message "Starting Syncthing..."
-        syncthing serve --no-browser &
-
-        # Wait for Syncthing to start and verify it's running
-        sleep 3
-        if curl -s http://localhost:8384 > /dev/null; then
-            log_message "✅ Syncthing started successfully"
-            osascript -e 'display notification "Syncthing started successfully" with title "BPSSD Volume Mounted"'
-        else
-            log_message "❌ Syncthing failed to start"
-            osascript -e 'display notification "Syncthing failed to start" with title "BPSSD Volume Mounted" subtitle "Check logs for details"'
-        fi
+while [ ! -d "$BPSSD" ]; do
+    if [ "$waited" -ge "$MAX_WAIT" ]; then
+        log "BPSSD not found after ${MAX_WAIT}s — aborting"
+        notify "BPSSD not found after ${MAX_WAIT}s" "Startup Failed"
+        exit 1
     fi
+    log "Waiting for BPSSD... (${waited}s/${MAX_WAIT}s)"
+    sleep "$INTERVAL"
+    waited=$((waited + INTERVAL))
+done
+
+log "BPSSD detected after ${waited}s"
+export PATH="$BREW_BIN:$PATH"
+
+# --- Syncthing ---
+if pgrep -f "syncthing" > /dev/null; then
+    log "Syncthing already running — skipping"
 else
-    log_message "BPSSD volume not found at /Volumes/BPSSD"
+    log "Starting Syncthing..."
+    nohup "$SYNCTHING_BIN" -no-browser >> "$LOG_FILE" 2>&1 &
+    disown
+    sleep 5
+    if curl -s --max-time 5 http://localhost:8384 > /dev/null; then
+        log "Syncthing started OK"
+        notify "Syncthing started" "BPSSD Startup"
+    else
+        log "Syncthing failed to respond on :8384"
+        notify "Syncthing failed to start" "BPSSD Startup"
+    fi
 fi
+
+# --- Excalidraw ---
+if lsof -i :5233 > /dev/null 2>&1; then
+    log "Excalidraw already running on :5233 — skipping"
+else
+    log "Starting Excalidraw..."
+    cd "$EXCALIDRAW_DIR"
+    nohup /opt/homebrew/bin/yarn start >> "$LOG_FILE" 2>&1 &
+    EXCALIDRAW_PID=$!
+    disown $EXCALIDRAW_PID
+
+    # Wait for vite dev server to come up
+    exc_waited=0
+    while [ "$exc_waited" -lt 60 ]; do
+        sleep 3
+        exc_waited=$((exc_waited + 3))
+        if lsof -i :5233 > /dev/null 2>&1; then
+            log "Excalidraw started OK on :5233 (PID $EXCALIDRAW_PID)"
+            notify "Excalidraw running on localhost:5233" "BPSSD Startup"
+            break
+        fi
+    done
+
+    if [ "$exc_waited" -ge 60 ]; then
+        log "Excalidraw did not start within 60s"
+        notify "Excalidraw failed to start" "BPSSD Startup"
+    fi
+fi
+
+log "=== Startup complete ==="

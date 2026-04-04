@@ -133,7 +133,9 @@ alias blogup="sh \$CODEF/dotfiles2/gitup.sh"
 alias blogadv="cd \$CODEF/sftown-pellizzetti-associados-fe"
 alias blogart='function _artigo(){ touch "${1}.mdx" && cat $CODEF/dotfiles2/headermdx.txt > "${1}.mdx"; echo "The file ${1}.mdx has been created."; }; _artigo'
 
+alias ffd="cd \$CODEF/fullFuckerDashboard"
 alias dot="cd \$CODEF/dotfiles2"
+alias cm="cd \$CODEF/contentMaker"
 
 # Uteis
 alias wab="cd \$CODEF/whatsbot"
