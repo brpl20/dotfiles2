@@ -1,5 +1,5 @@
 #!/bin/bash
-# Startup script: waits for BPSSD volume, starts Syncthing + Excalidraw
+# Startup script: waits for BPSSD volume, starts Syncthing + Nextcloud + Excalidraw + AI Dashboard
 # Location: /Users/brpl/code/dotfiles2/mac_scripts/brewhd_syncthing.sh
 # LaunchAgent: ~/Library/LaunchAgents/com.brpl.brewhd-startup.plist
 
@@ -8,6 +8,8 @@ BPSSD="/Volumes/BPSSD"
 BREW_BIN="$BPSSD/Aplicativos-HomeBrew/bin"
 SYNCTHING_BIN="$BPSSD/Aplicativos-HomeBrew/opt/syncthing/bin/syncthing"
 EXCALIDRAW_DIR="/Users/brpl/code/excalidraw"
+NEXTCLOUD_APP="/Applications/Nextcloud.app"
+AI_DASHBOARD_DIR="/Users/brpl/code/fullFuckerDashboard/ai-dashboard"
 MAX_WAIT=300  # 5 minutes max
 INTERVAL=5
 
@@ -54,6 +56,22 @@ else
     fi
 fi
 
+# --- Nextcloud ---
+if pgrep -f "Nextcloud.app" > /dev/null; then
+    log "Nextcloud already running — skipping"
+else
+    log "Starting Nextcloud..."
+    open -a "$NEXTCLOUD_APP"
+    sleep 3
+    if pgrep -f "Nextcloud.app" > /dev/null; then
+        log "Nextcloud started OK"
+        notify "Nextcloud started" "BPSSD Startup"
+    else
+        log "Nextcloud failed to start"
+        notify "Nextcloud failed to start" "BPSSD Startup"
+    fi
+fi
+
 # --- Excalidraw ---
 if lsof -i :5233 > /dev/null 2>&1; then
     log "Excalidraw already running on :5233 — skipping"
@@ -79,6 +97,33 @@ else
     if [ "$exc_waited" -ge 60 ]; then
         log "Excalidraw did not start within 60s"
         notify "Excalidraw failed to start" "BPSSD Startup"
+    fi
+fi
+
+# --- AI Dashboard ---
+if lsof -i :3000 > /dev/null 2>&1; then
+    log "AI Dashboard already running on :3000 — skipping"
+else
+    log "Starting AI Dashboard..."
+    cd "$AI_DASHBOARD_DIR"
+    nohup /opt/homebrew/bin/npm run dev >> "$LOG_FILE" 2>&1 &
+    DASHBOARD_PID=$!
+    disown $DASHBOARD_PID
+
+    dash_waited=0
+    while [ "$dash_waited" -lt 60 ]; do
+        sleep 3
+        dash_waited=$((dash_waited + 3))
+        if lsof -i :3000 > /dev/null 2>&1; then
+            log "AI Dashboard started OK on :3000 (PID $DASHBOARD_PID)"
+            notify "AI Dashboard running on localhost:3000" "BPSSD Startup"
+            break
+        fi
+    done
+
+    if [ "$dash_waited" -ge 60 ]; then
+        log "AI Dashboard did not start within 60s"
+        notify "AI Dashboard failed to start" "BPSSD Startup"
     fi
 fi
 
