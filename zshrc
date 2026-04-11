@@ -105,3 +105,6 @@ echo "Ola Bruno! Nao se esqueca de fazer esse o melhor dia de sua vida! Memento 
 
 # opencode
 export PATH=/home/brpl/.opencode/bin:$PATH
+export AHREFS_API_KEY="sua-chave-aqui"
+export AHREFS_API_KEY="sua-chave-aqui"
+export AHREFS_API_KEY="sua-chave-aqui"

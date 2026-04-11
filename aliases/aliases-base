@@ -142,6 +142,8 @@ alias wab="cd \$CODEF/whatsbot"
 alias wao="cd \$CODEF/whats-organizer"
 alias wap="cd \$CODEF/wap-uteis"
 alias crw="cd \$CODEF/crawling"
+alias craw="cd \$CODEF/crawlers"
+alias ld="cd \$CODEF/prc_legal_data"
 
 alias desk="cd \$DESK"
 alias down="cd \$DOWN"
@@ -158,6 +160,7 @@ s3last() {
     local count=${1:-2}
     aws s3 ls s3://prcstudio3herokubucket/ --recursive | sort | tail -n $count
 }
+alias s3l="aws s3 ls s3://prcstudio3herokubucket --recursive | sort -k1,2 | tail -5"
 
 # Quick git push for simple repos
 alias gup="sh \$CODEF/dotfiles2/gitup.sh"
