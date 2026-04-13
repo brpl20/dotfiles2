@@ -120,9 +120,9 @@ alias prcd="cd \$CODEF/ProcStudio/docs"
 alias prc-tree="\$CODEF/dotfiles2/shell/prc-tree.sh"
 
 # ProcStudio APIs/Scrapers
-alias prcld="cd \$CODEF/legal_data_api"
-alias prcoab="cd \$CODEF/oab_sa"
-alias prcocr="cd \$CODEF/procstudio_ocr"
+alias prcld="cd \$CODEF/prc_legal_data_api"
+alias prcoab=echo "Refazer"
+alias prcocr=echo "Refazer"
 
 # Blog
 alias blog="code \$CODEF/brpl-blog/_posts"
@@ -130,12 +130,18 @@ alias blogf="cd \$CODEF/brpl-blog"
 alias blogup="sh \$CODEF/dotfiles2/gitup.sh"
 
 # Advocacia
-alias blogadv="cd \$CODEF/sftown-pellizzetti-associados-fe"
-alias blogart='function _artigo(){ touch "${1}.mdx" && cat $CODEF/dotfiles2/headermdx.txt > "${1}.mdx"; echo "The file ${1}.mdx has been created."; }; _artigo'
+alias blogadv=echo "Refazer"
+alias blogart=echo "Refazer"
+alias fam="cd \$OD\"
 
+# Dashboard & Marketing 
 alias ffd="cd \$CODEF/fullFuckerDashboard"
-alias dot="cd \$CODEF/dotfiles2"
 alias cm="cd \$CODEF/contentMaker"
+
+
+
+# DotFiles
+alias dot="cd \$CODEF/dotfiles2"
 
 # Uteis
 alias wab="cd \$CODEF/whatsbot"
