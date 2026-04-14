@@ -258,3 +258,6 @@ matches:
     replace: "Servidor Público"
   - trigger: "Sp;"
     replace: "Serviço Público"
+
+  - trigger: "=*"
+    replace: "login =* pass"
