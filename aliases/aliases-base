@@ -110,17 +110,24 @@ alias uteis="vim \$UTEIS"
 alias cf="cd \$CODEF"
 alias n8n="cd \$NC/n8n"
 
-# ProcStudio
-alias prc="cd \$CODEF/ProcStudio"
-alias prcb="cd \$CODEF/ProcStudio/api"
-alias prcf="cd \$CODEF/ProcStudio/frontend"
-alias prct="cd \$CODEF/ProcStudio/tests"
-alias prcblog="cd \$CODEF/procstudio_blog"
-alias prcd="cd \$CODEF/ProcStudio/docs"
+# ProcStudio (org folder + main app)
+alias prc="cd \$CODEF/ProcStudio/ProcStudio"
+alias prcb="cd \$CODEF/ProcStudio/ProcStudio/api"
+alias prcf="cd \$CODEF/ProcStudio/ProcStudio/frontend"
+alias prct="cd \$CODEF/ProcStudio/ProcStudio/tests"
+alias prcd="cd \$CODEF/ProcStudio/ProcStudio/docs"
+alias prcbr="gh browse --repo ProcStudio/ProcStudio"
 alias prc-tree="\$CODEF/dotfiles2/shell/prc-tree.sh"
 
-# ProcStudio APIs/Scrapers
-alias prcld="cd \$CODEF/prc_legal_data_api"
+# ProcStudio org-level repos
+alias prcorg="cd \$CODEF/ProcStudio"
+alias prcblog="cd \$CODEF/ProcStudio/prc_blog"
+alias prcld="cd \$CODEF/ProcStudio/prc_legal_data"
+alias prcext="cd \$CODEF/ProcStudio/prc_extensao"
+alias prcquill="cd \$CODEF/ProcStudio/prc_quill"
+alias prcsig="cd \$CODEF/ProcStudio/prc_signer_a1"
+alias prccnis="cd \$CODEF/ProcStudio/cnis-importer"
+alias prcdocx="cd \$CODEF/ProcStudio/docx"
 alias prcoab=echo "Refazer"
 alias prcocr=echo "Refazer"
 
@@ -132,11 +139,11 @@ alias blogup="sh \$CODEF/dotfiles2/gitup.sh"
 # Advocacia
 alias blogadv=echo "Refazer"
 alias blogart=echo "Refazer"
-alias fam="cd \$OD\"
+alias fam="cd \$OD"
 
-# Dashboard & Marketing 
+# Dashboard & Marketing
 alias ffd="cd \$CODEF/fullFuckerDashboard"
-alias cm="cd \$CODEF/contentMaker"
+alias cm="cd \$CODEF/content-workspace"
 
 
 
@@ -145,11 +152,10 @@ alias dot="cd \$CODEF/dotfiles2"
 
 # Uteis
 alias wab="cd \$CODEF/whatsbot"
-alias wao="cd \$CODEF/whats-organizer"
+alias wao="cd \$CODEF/ProcStudio/whats-organizer-rails"
 alias wap="cd \$CODEF/wap-uteis"
 alias crw="cd \$CODEF/crawling"
 alias craw="cd \$CODEF/crawlers"
-alias ld="cd \$CODEF/prc_legal_data"
 
 alias desk="cd \$DESK"
 alias down="cd \$DOWN"
@@ -158,10 +164,10 @@ alias DOWN="cd \$BIGDOWN"
 # Comandos Recorrentes Globais
 alias sst="syncthing"
 alias pass='\$CODEF/dotfiles2/shell/password_generator.sh'
-alias cpf="node ~/code/ProcStudio/ai-tools/cpf_generator.js"
-alias cnpj="node ~/code/ProcStudio/ai-tools/cnpj_generator.js"
-alias cep="node ~/code/ProcStudio/ai-tools/cep_generator.js"
-alias oab="node ~/code/ProcStudio/ai-tools/oab_generator.js"
+alias cpf="node ~/code/ProcStudio/ProcStudio/ai-tools/cpf_generator.js"
+alias cnpj="node ~/code/ProcStudio/ProcStudio/ai-tools/cnpj_generator.js"
+alias cep="node ~/code/ProcStudio/ProcStudio/ai-tools/cep_generator.js"
+alias oab="node ~/code/ProcStudio/ProcStudio/ai-tools/oab_generator.js"
 s3last() {
     local count=${1:-2}
     aws s3 ls s3://prcstudio3herokubucket/ --recursive | sort | tail -n $count
