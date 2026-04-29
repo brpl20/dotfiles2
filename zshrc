@@ -111,3 +111,6 @@ export AHREFS_API_KEY="sua-chave-aqui"
 
 # Claude Code: 1h prompt cache TTL (set by /octo:setup)
 export ENABLE_PROMPT_CACHING_1H=1
+
+# bun completions
+[ -s "/Users/brpl/.bun/_bun" ] && source "/Users/brpl/.bun/_bun"

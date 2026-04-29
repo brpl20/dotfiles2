@@ -59,6 +59,7 @@ alias ls='ls -G'
 alias lsa='ls -lah'
 
 alias bigtree='$CODEF/dotfiles2/shell/big_tree.sh'
+alias semana='sh $CODEF/dotfiles2/shell/semana.sh'
 
 # Case-insensitive search in ls
 lg() {
