@@ -129,8 +129,7 @@ alias prcquill="cd \$CODEF/ProcStudio/prc_quill"
 alias prcsig="cd \$CODEF/ProcStudio/prc_signer_a1"
 alias prccnis="cd \$CODEF/ProcStudio/cnis-importer"
 alias prcdocx="cd \$CODEF/ProcStudio/docx"
-alias prcoab=echo "Refazer"
-alias prcocr=echo "Refazer"
+alias prcoab="cd \$CODEF/ProcStudio/prc_oab"
 
 # Blog
 alias blog="code \$CODEF/brpl-blog/_posts"
@@ -144,7 +143,10 @@ alias fam="cd \$OD"
 
 # Dashboard & Marketing
 alias ffd="cd \$CODEF/fullFuckerDashboard"
-alias cm="cd \$CODEF/content-workspace"
+alias cw="cd \$CODEF/content-workspace"
+alias cm="cd \$CODEF/content-workspace/contentMaker"
+alias craw="cd \$CODEF/content-workspace/crawlers"
+alias jur="cd \$CODEF/content-workspace/jur"
 
 
 

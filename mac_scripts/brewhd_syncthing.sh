@@ -40,7 +40,7 @@ log "BPSSD detected after ${waited}s"
 export PATH="$BREW_BIN:$PATH"
 
 # --- Syncthing ---
-if pgrep -f "syncthing" > /dev/null; then
+if pgrep -x syncthing > /dev/null; then
     log "Syncthing already running — skipping"
 else
     log "Starting Syncthing..."
@@ -101,8 +101,8 @@ else
 fi
 
 # --- AI Dashboard ---
-if lsof -i :3000 > /dev/null 2>&1; then
-    log "AI Dashboard already running on :3000 — skipping"
+if lsof -i :3008 > /dev/null 2>&1; then
+    log "AI Dashboard already running on :3008 — skipping"
 else
     log "Starting AI Dashboard..."
     cd "$AI_DASHBOARD_DIR"
@@ -114,9 +114,9 @@ else
     while [ "$dash_waited" -lt 60 ]; do
         sleep 3
         dash_waited=$((dash_waited + 3))
-        if lsof -i :3000 > /dev/null 2>&1; then
-            log "AI Dashboard started OK on :3000 (PID $DASHBOARD_PID)"
-            notify "AI Dashboard running on localhost:3000" "BPSSD Startup"
+        if lsof -i :3008 > /dev/null 2>&1; then
+            log "AI Dashboard started OK on :3008 (PID $DASHBOARD_PID)"
+            notify "AI Dashboard running on localhost:3008" "BPSSD Startup"
             break
         fi
     done
