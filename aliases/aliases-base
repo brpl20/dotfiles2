@@ -111,16 +111,17 @@ alias uteis="vim \$UTEIS"
 alias cf="cd \$CODEF"
 alias n8n="cd \$NC/n8n"
 
-# ProcStudio (org folder + main app)
-alias prc="cd \$CODEF/ProcStudio/ProcStudio"
-alias prcb="cd \$CODEF/ProcStudio/ProcStudio/api"
-alias prcf="cd \$CODEF/ProcStudio/ProcStudio/frontend"
-alias prct="cd \$CODEF/ProcStudio/ProcStudio/tests"
-alias prcd="cd \$CODEF/ProcStudio/ProcStudio/docs"
-alias prcbr="gh browse --repo ProcStudio/ProcStudio"
+# ProcStudio — main app (ProcStudio-Docker)
+alias prc="cd \$CODEF/ProcStudio/ProcStudio-Docker"
+alias prcb="cd \$CODEF/ProcStudio/ProcStudio-Docker/api"
+alias prcf="cd \$CODEF/ProcStudio/ProcStudio-Docker/frontend"
+alias prccf="cd \$CODEF/ProcStudio/ProcStudio-Docker/customer-frontend"
+alias prct="cd \$CODEF/ProcStudio/ProcStudio-Docker/tests"
+alias prcd="cd \$CODEF/ProcStudio/ProcStudio-Docker/docs"
+alias prcbr="gh browse --repo ProcStudioOrg/ProcStudio"
 alias prc-tree="\$CODEF/dotfiles2/shell/prc-tree.sh"
 
-# ProcStudio org-level repos
+# ProcStudio — org folder + sibling repos
 alias prcorg="cd \$CODEF/ProcStudio"
 alias prcblog="cd \$CODEF/ProcStudio/prc_blog"
 alias prcld="cd \$CODEF/ProcStudio/prc_legal_data"
@@ -167,10 +168,14 @@ alias DOWN="cd \$BIGDOWN"
 # Comandos Recorrentes Globais
 alias sst="syncthing"
 alias pass='\$CODEF/dotfiles2/shell/password_generator.sh'
-alias cpf="node ~/code/ProcStudio/ProcStudio/ai-tools/cpf_generator.js"
-alias cnpj="node ~/code/ProcStudio/ProcStudio/ai-tools/cnpj_generator.js"
-alias cep="node ~/code/ProcStudio/ProcStudio/ai-tools/cep_generator.js"
-alias oab="node ~/code/ProcStudio/ProcStudio/ai-tools/oab_generator.js"
+alias cpf="node \$CODEF/ProcStudio/ProcStudio-Docker/ai-tools/cpf_generator.js"
+alias cnpj="node \$CODEF/ProcStudio/ProcStudio-Docker/ai-tools/cnpj_generator.js"
+alias cep="node \$CODEF/ProcStudio/ProcStudio-Docker/ai-tools/cep_generator.js"
+alias oab="node \$CODEF/ProcStudio/ProcStudio-Docker/ai-tools/oab_generator.js"
+
+# Mail (mbsync + notmuch + neomutt)
+alias mailsync="mbsync -a && notmuch --config=$HOME/.notmuch-config new"
+alias mutt="mailsync && neomutt"
 s3last() {
     local count=${1:-2}
     aws s3 ls s3://prcstudio3herokubucket/ --recursive | sort | tail -n $count

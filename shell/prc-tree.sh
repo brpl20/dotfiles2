@@ -21,7 +21,7 @@
 set -e
 
 CODEF="${CODEF:-/Users/brpl/code}"
-PROCSTUDIO_ROOT="${CODEF}/ProcStudio"
+PROCSTUDIO_ROOT="${CODEF}/ProcStudio/ProcStudio-Docker"
 
 # --- List worktrees ---
 if [[ "$1" == "-l" || "$1" == "--list" ]]; then
