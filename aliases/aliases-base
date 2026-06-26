@@ -170,6 +170,7 @@ alias sst="syncthing"
 alias pass='\$CODEF/dotfiles2/shell/password_generator.sh'
 alias cpf="node \$CODEF/ProcStudio/ProcStudio-Docker/ai-tools/cpf_generator.js"
 alias cnpj="node \$CODEF/ProcStudio/ProcStudio-Docker/ai-tools/cnpj_generator.js"
+alias cnpjnew="node \$CODEF/ProcStudio/ProcStudio-Docker/ai-tools/cnpj_generator.js --alpha"
 alias cep="node \$CODEF/ProcStudio/ProcStudio-Docker/ai-tools/cep_generator.js"
 alias oab="node \$CODEF/ProcStudio/ProcStudio-Docker/ai-tools/oab_generator.js"
 
