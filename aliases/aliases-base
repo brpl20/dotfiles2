@@ -94,6 +94,14 @@ alias edaliases="$EDITOR $CODEF/dotfiles2/aliases/aliases-base"
 alias catespanso="cat $CODEF/dotfiles2/espanso/base.yml"
 alias eduteis="$EDITOR2 $UTEIS"
 
+# cath [n] file -> head, catt [n] file -> tail (n defaults to 10)
+cath() {
+    if [[ "$1" == <-> ]]; then head -n "$1" "${@:2}"; else head -n 10 "$@"; fi
+}
+catt() {
+    if [[ "$1" == <-> ]]; then tail -n "$1" "${@:2}"; else tail -n 10 "$@"; fi
+}
+
 # Locations
 alias gd="cd \$GD"
 alias od="cd \$OD"
