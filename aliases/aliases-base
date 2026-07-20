@@ -115,6 +115,13 @@ ncbd() {
 }
 alias wi="cd \$NC/wikit"
 alias daily="code \$NC/wikit"
+
+# Open the changelog in the current folder (case-insensitive)
+changelog() {
+    local f
+    f=$(ls -1 | grep -i changelog | head -1)
+    if [[ -n "$f" ]]; then vim "$f"; else echo "no changelog in $(pwd)"; fi
+}
 alias uteis="vim \$UTEIS"
 alias cf="cd \$CODEF"
 alias n8n="cd \$NC/n8n"
@@ -129,6 +136,14 @@ alias prcd="cd \$CODEF/ProcStudio/ProcStudio-Docker/docs"
 alias prcbr="gh browse --repo ProcStudioOrg/ProcStudio"
 alias prc-tree="\$CODEF/dotfiles2/shell/prc-tree.sh"
 
+# ProcStudio — worktree 1 (ProcStudio-Docker-WorkTree1)
+alias prc1="cd \$CODEF/ProcStudio/ProcStudio-Docker-WorkTree1"
+alias prc1b="cd \$CODEF/ProcStudio/ProcStudio-Docker-WorkTree1/api"
+alias prc1f="cd \$CODEF/ProcStudio/ProcStudio-Docker-WorkTree1/frontend"
+alias prc1cf="cd \$CODEF/ProcStudio/ProcStudio-Docker-WorkTree1/customer-frontend"
+alias prc1t="cd \$CODEF/ProcStudio/ProcStudio-Docker-WorkTree1/tests"
+alias prc1d="cd \$CODEF/ProcStudio/ProcStudio-Docker-WorkTree1/docs"
+
 # ProcStudio — org folder + sibling repos
 alias prcorg="cd \$CODEF/ProcStudio"
 alias prcblog="cd \$CODEF/ProcStudio/prc_blog"
@@ -137,8 +152,19 @@ alias prcext="cd \$CODEF/ProcStudio/prc_extensao"
 alias prcquill="cd \$CODEF/ProcStudio/prc_quill"
 alias prcsig="cd \$CODEF/ProcStudio/prc_signer_a1"
 alias prccnis="cd \$CODEF/ProcStudio/cnis-importer"
+alias prccol="cd \$CODEF/ProcStudio/prc_collection"
+alias prccron="cd \$CODEF/ProcStudio/prc_cron_tests"
+alias prcwao="cd \$CODEF/ProcStudio/prc_wao"
 alias prcdocx="cd \$CODEF/ProcStudio/docx"
 alias prcoab="cd \$CODEF/ProcStudio/prc_oab"
+
+# Print every ProcStudio repo name -> absolute path
+prcwhere() {
+    local d
+    for d in "\$CODEF/ProcStudio"/*/; do
+        printf '%-32s %s\n' "\$(basename "\$d")" "\$d"
+    done
+}
 
 # Blog
 alias blog="code \$CODEF/brpl-blog/_posts"
@@ -164,7 +190,7 @@ alias dot="cd \$CODEF/dotfiles2"
 
 # Uteis
 alias wab="cd \$CODEF/whatsbot"
-alias wao="cd \$CODEF/ProcStudio/whats-organizer-rails"
+alias wao="cd \$CODEF/ProcStudio/prc_wao"
 alias wap="cd \$CODEF/wap-uteis"
 alias crw="cd \$CODEF/crawling"
 alias craw="cd \$CODEF/crawlers"
